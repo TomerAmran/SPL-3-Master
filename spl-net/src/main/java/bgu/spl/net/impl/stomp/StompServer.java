@@ -8,15 +8,15 @@ public class StompServer {
 
     public static void main(String[] args) throws Exception {
         if (args.length < 2)
-            throw new Exception("args should be: <port> <server type>");
+            throw new Exception("args should be:<port> <server-type>");
         int port = Integer.getInteger(args[0]);
         String serverType = args[1];
 
         if (serverType.equals("tpc")){
             Server.threadPerClient(
                     port,
-                    () -> new StompProtocol(), //protocol factory
-                    ObjectEncoderDecoder::new //message encoder decoder factory
+                    () -> new StompMessagingProtocolImpl(), //protocol factory
+                    StompEncoderDecoder::new //message encoder decoder factory
             ).serve();
         }
         if (serverType.equals("reactor")){}
