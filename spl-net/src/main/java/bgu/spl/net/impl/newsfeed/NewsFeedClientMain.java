@@ -9,14 +9,14 @@ public class NewsFeedClientMain {
             args = new String[]{"127.0.0.1"};
         }
 
-//        System.out.println("running clients");
+        System.out.println("running clients");
         runFirstClient(args[0]);
         runSecondClient(args[0]);
         runThirdClient(args[0]);
     }
 
     private static void runFirstClient(String host) throws Exception {
-        try (RCIClient c = new RCIClient(host, 7777)) {
+        try (RCIClient c = new RCIClient(host, 7776)) {
             c.send(new PublishNewsCommand(
                     "jobs",
                     "System Programmer, knowledge in C++, Java and Python required. call 0x134693F"));
@@ -39,14 +39,14 @@ public class NewsFeedClientMain {
     }
 
     private static void runSecondClient(String host) throws Exception {
-        try (RCIClient c = new RCIClient(host, 7777)) {
+        try (RCIClient c = new RCIClient(host, 7776)) {
             c.send(new FetchNewsCommand("jobs"));
             System.out.println("second client received: " + c.receive());
         }
     }
 
     private static void runThirdClient(String host) throws Exception {
-        try (RCIClient c = new RCIClient(host, 7777)) {
+        try (RCIClient c = new RCIClient(host, 7776)) {
             c.send(new FetchNewsCommand("headlines"));
             System.out.println("third client received: " + c.receive());
         }
