@@ -7,19 +7,16 @@ public class User {
     public final String userName;
     public final String password;
     private int connectionId;
-    private ConcurrentHashMap<Integer,String> subId_Topic_Map;
+    private ConcurrentHashMap<Integer, String> subId_Topic_Map;
     private boolean loggedin;
 
 
-
-
-    public User(String userName,String password,int connection_ID)
-    {
-        this.connectionId=connection_ID;
-        this.userName=userName;
-        this.password=password;
-        subId_Topic_Map=new ConcurrentHashMap<>();
-        loggedin=false;
+    public User(String userName, String password, int connection_ID) {
+        this.connectionId = connection_ID;
+        this.userName = userName;
+        this.password = password;
+        subId_Topic_Map = new ConcurrentHashMap<>();
+        loggedin = false;
 
     }
 
@@ -40,20 +37,20 @@ public class User {
         return loggedin;
     }
 
-    public void setLoggedin(boolean loggedin) {
-        this.loggedin = loggedin;
+    public void Login() {
+        this.loggedin = true;
     }
-    public void Addsubscrbtion(int subId,String topic)
-    {
-        subId_Topic_Map.putIfAbsent(subId,topic);
+
+    public void Addsubscrbtion(int subId, String topic) {
+        subId_Topic_Map.putIfAbsent(subId, topic);
     }
-    public void RemoveSubscribtion(int subId)
-    {
+
+    public void RemoveSubscribtion(int subId) {
         subId_Topic_Map.remove(subId);
     }
-    public void Disconnect()
-    {
+
+    public void Disconnect() {
         subId_Topic_Map.clear();
-        loggedin=false;
+        loggedin = false;
     }
 }
