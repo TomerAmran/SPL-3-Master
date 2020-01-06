@@ -11,7 +11,7 @@ public class DataBase {
     private ConcurrentHashMap<String, ConcurrentHashMap<User,Integer>> topic_Subscribtion_Map;
     private ConcurrentHashMap<Integer,User> connectionId_User_Map;
     private AtomicInteger messageCounter;
-    private  static DataBase instance=new DataBase();
+    private  static DataBase instance = new DataBase();
 
     private DataBase()
     {

@@ -2,6 +2,8 @@ package bgu.spl.net.impl.stomp;
 
 import bgu.spl.net.impl.rci.ObjectEncoderDecoder;
 import bgu.spl.net.impl.rci.RemoteCommandInvocationProtocol;
+import bgu.spl.net.srv.Connections;
+import bgu.spl.net.srv.ConnectionsImpl;
 import bgu.spl.net.srv.Server;
 
 public class StompServer {
@@ -12,10 +14,12 @@ public class StompServer {
         int port = Integer.getInteger(args[0]);
         String serverType = args[1];
 
+        //intiate DataBase and Connections
+        Connections<String> connection = new ConnectionsImpl<>();
         if (serverType.equals("tpc")){
             Server.threadPerClient(
                     port,
-                    () -> new StompMessagingProtocolImpl(), //protocol factory
+                    StompMessagingProtocolImpl::new, //protocol factory
                     StompEncoderDecoder::new //message encoder decoder factory
             ).serve();
         }
