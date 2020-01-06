@@ -96,27 +96,25 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
         }
     }
     private void SUBSCRIBE_received(HashMap<String,String> headers, String body) {
-       database.Subscribe(headers.get("destination"), headers.get("id"), connectionId);
-       //subscribe in connections
+        database.Subscribe(headers.get("destination"), headers.get("id"), connectionId);
+        //subscribe in connections
         if ((headers.get("receipt")) != null) {
             StompFrame frame = new StompFrame();
             frame.setCommand("Recipt");
-            frame.addHeader("receipt-id",headers.get("receipt"));
-            connections.send(connectionId,frame.toString())
+            frame.addHeader("receipt-id", headers.get("receipt"));
+            connections.send(connectionId, frame.toString());
         }
-
+    }
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body)
     {
         database.Subscribe(headers.get("destination"),headers.get("id"),connectionId);
         //add subscription to connections
+        StompFrame frame = new StompFrame();
         if((headers.get("receipt")) != null) {
-            StompFrame frame = new StompFrame();
             frame.setCommand("Recipt");
             frame.addHeader("receipt-id",headers.get("receipt"));
-            connections.send(connectionId,frame.toString())
+            connections.send(connectionId,frame.toString());
         }
-
-
     }
     private void DISCONNECT_received(HashMap<String,String> headers, String body){}
     private void sendCONNECTED(HashMap<String,String> headers){
