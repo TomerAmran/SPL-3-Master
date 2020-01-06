@@ -56,7 +56,17 @@ public class StompFrame {
         return output;
         }
 
+    public void setCommand(String command) {
+        this.command = Command.valueOf(command);
+    }
 
+    public void addHeader(String headerName, String headerValue) {
+        headers.put(headerName,headerValue);
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 
     public Command getCommand() {
         return command;
