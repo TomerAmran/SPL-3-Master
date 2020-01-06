@@ -24,6 +24,7 @@ public class DataBase {
     {
         User newUser=new User(username,password,connectionId);
         name_User_Map.put(username,newUser);
+        newUser.Login();
     }
     public boolean DoesUserExists(String username)
     {

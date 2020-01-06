@@ -27,18 +27,18 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
             case CONNECT:
                 CONNECT_received(frame.getHeaders(), frame.getBody());
                 break;
-            case CONNECTED:
-                CONNECTED_received(frame.getHeaders(), frame.getBody());
-                break;
-            case MESSAGE:
-                MESSAGE_received(frame.getHeaders(), frame.getBody());
-                break;
-            case RECEIPT:
-                RECEIPT_received(frame.getHeaders(), frame.getBody());
-                break;
-            case ERROR:
-                ERROR_received(frame.getHeaders(), frame.getBody());
-                break;
+//            case CONNECTED:
+//                CONNECTED_received(frame.getHeaders(), frame.getBody());
+//                break;
+//            case MESSAGE:
+//                MESSAGE_received(frame.getHeaders(), frame.getBody());
+//                break;
+//            case RECEIPT:
+//                RECEIPT_received(frame.getHeaders(), frame.getBody());
+//                break;
+//            case ERROR:
+//                ERROR_received(frame.getHeaders(), frame.getBody());
+//                break;
             case SEND:
                 SEND_received(frame.getHeaders(), frame.getBody());
                 break;
@@ -60,19 +60,35 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
         String username = headers.get("login");
         String passcode = headers.get("passcode");
         //new user
-        if(!database.DoesUserExists(username))
+        if(!database.DoesUserExists(username)) {
+            database.AddUser(connectionId,username,passcode);
             sendCONNECTED(headers);
+        }
         else{//user exist
-            if(!database.IsPasswordCorrect(username,passcode));
-            //error managing. bahhhh
+            if(!database.IsPasswordCorrect(username,passcode))//wrong passcode
+                sendWrongPasswordError();
+            else
+                if(!database.IsLoggedIn(username))
+                    sendUserAlreadyLoggedInError();
+                else {
+                    database.Login(username);
+                    sendCONNECTED(headers);
+                }
+
         }
 
     }
-    private void CONNECTED_received(HashMap<String,String> headers, String body){}
-    private void MESSAGE_received(HashMap<String,String> headers, String body){}
-    private void RECEIPT_received(HashMap<String,String> headers, String body){}
-    private void ERROR_received(HashMap<String,String> headers, String body){}
-    private void SEND_received(HashMap<String,String> headers, String body){}
+//    private void CONNECTED_received(HashMap<String,String> headers, String body){}
+//    private void MESSAGE_received(HashMap<String,String> headers, String body){}
+//    private void RECEIPT_received(HashMap<String,String> headers, String body){}
+//    private void ERROR_received(HashMap<String,String> headers, String body){}
+    private void SEND_received(HashMap<String,String> headers, String body){
+        StompFrame message = new StompFrame();
+        message.setCommand("MESSAGE");
+        message.addHeader("destination",headers.get("destination"));
+        message.addHeader("Message-id","1");
+        message.setBody(body);
+    }
     private void SUBSCRIBE_received(HashMap<String,String> headers, String body){}
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body){}
     private void DISCONNECT_received(HashMap<String,String> headers, String body){}
@@ -82,6 +98,19 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
         frame.addHeader("version",headers.get("accept-version"));
         connections.send(connectionId, frame.toString());
     }
+    private void sendWrongPasswordError(){
+        StompFrame f = new StompFrame();
+        f.setCommand("ERROR");
+        f.addHeader("message","Wrong password");
+        connections.send(connectionId,f.toString());
+    }
+    private void sendUserAlreadyLoggedInError(){
+        StompFrame f = new StompFrame();
+        f.setCommand("ERROR");
+        f.addHeader("message","User already logged in");
+        connections.send(connectionId,f.toString());
+    }
+
     /**
      * @return true if the connection should be terminated
      */
