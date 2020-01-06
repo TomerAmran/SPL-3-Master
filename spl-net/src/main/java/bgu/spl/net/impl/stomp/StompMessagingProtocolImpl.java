@@ -104,7 +104,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
             frame.addHeader("receipt-id",headers.get("receipt"));
             connections.send(connectionId,frame.toString())
         }
-    }
+    
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body)
     {
         database.Subscribe(headers.get("destination"),headers.get("id"),connectionId);
