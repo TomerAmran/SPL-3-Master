@@ -1,12 +1,16 @@
 package bgu.spl.net.srv;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DataBase {
 
     private ConcurrentHashMap<String,User> name_User_Map;
     private ConcurrentHashMap<String, ConcurrentHashMap<User,Integer>> topic_Subscribtion_Map;
     private ConcurrentHashMap<Integer,User> connectionId_User_Map;
+    private AtomicInteger messageCounter;
     private  static DataBase instance=new DataBase();
 
     private DataBase()
@@ -14,6 +18,7 @@ public class DataBase {
         topic_Subscribtion_Map =new ConcurrentHashMap<>();
         name_User_Map=new ConcurrentHashMap<>();
         connectionId_User_Map=new ConcurrentHashMap<>();
+        messageCounter=new AtomicInteger(0);
     }
 
     public static DataBase getInstance()
@@ -54,17 +59,32 @@ public class DataBase {
     {
         if( topic_Subscribtion_Map.get(topic)!=null) {
             topic_Subscribtion_Map.get(topic).remove(connectionId_User_Map.get(connectionId));
-            connectionId_User_Map.get(connectionId).RemoveSubscribtion(subId);
         }
     }
     public void Disconnect(int connectionId)
     {
         User toDisconnect=connectionId_User_Map.get(connectionId);
+        for(String topic :topic_Subscribtion_Map.keySet())
+        {
+            topic_Subscribtion_Map.get(topic).remove(connectionId_User_Map.get(connectionId));
+        }
         toDisconnect.Disconnect();
     }
     public int GetUserSubId(String topic,String username)
     {
         return topic_Subscribtion_Map.get(topic).get(username);
     }
+    public List<Integer> GetUserSubIdsSubscribedToTopic(String topic)
+    {
+        LinkedList<Integer> usernames=new LinkedList();
+        for(User user:topic_Subscribtion_Map.get(topic).keySet())
+            usernames.add(topic_Subscribtion_Map.get(topic).get(user));
+        return usernames;
+    }
 
+
+    public int getAndIncreaseMessageCounter() {
+        return messageCounter.getAndIncrement();
+
+    }
 }
