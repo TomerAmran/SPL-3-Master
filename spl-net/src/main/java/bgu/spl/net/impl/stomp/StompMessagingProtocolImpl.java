@@ -84,27 +84,38 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
 //    private void ERROR_received(HashMap<String,String> headers, String body){}
     private void SEND_received(HashMap<String,String> headers, String body){
         StompFrame message = new StompFrame();
-        message.setCommand("MESSAGE");
-        message.addHeader("destination",headers.get("destination"));
-        message.addHeader("Message-id","1");
-        message.setBody(body);
+        for(int connectionId:database.GetUserSubIdsSubscribedToTopic(headers.get("destination")))
+        {
+            message.setCommand("MESSAGE");
+            message.addHeader("subscription",database.GetUserSubId(headers.get("destination"),connectionId));
+            message.addHeader("Message-id",(database.getAndIncreaseMessageCounter().toString()));
+            message.addHeader("destination",headers.get("destination"));
+            message.setBody(body);
+            connections.send(connectionId,message.toString());
+
+        }
     }
-    private void SUBSCRIBE_received(HashMap<String,String> headers, String body)
-    {
-        if((headers.get("receipt"))!=null) {
+    private void SUBSCRIBE_received(HashMap<String,String> headers, String body) {
+       database.Subscribe(headers.get("destination"), headers.get("id"), connectionId);
+       //subscribe in connections
+        if ((headers.get("receipt")) != null) {
             StompFrame frame = new StompFrame();
             frame.setCommand("Recipt");
-            frame
+            frame.addHeader("receipt-id",headers.get("receipt"));
+            connections.send(connectionId,frame.toString())
         }
-        database.Subscribe(headers.get("destination"),headers.get("id"),connectionId);
     }
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body)
     {
-        if()
-        StompFrame frame = new StompFrame();
-        frame.setCommand("Recipt");
         database.Subscribe(headers.get("destination"),headers.get("id"),connectionId);
         //add subscription to connections
+        if((headers.get("receipt")) != null) {
+            StompFrame frame = new StompFrame();
+            frame.setCommand("Recipt");
+            frame.addHeader("receipt-id",headers.get("receipt"));
+            connections.send(connectionId,frame.toString())
+        }
+
 
     }
     private void DISCONNECT_received(HashMap<String,String> headers, String body){}

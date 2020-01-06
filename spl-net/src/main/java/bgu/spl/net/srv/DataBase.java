@@ -70,21 +70,22 @@ public class DataBase {
         }
         toDisconnect.Disconnect();
     }
-    public int GetUserSubId(String topic,String username)
+    public String GetUserSubId(String topic, int connectionId)
     {
-        return topic_Subscribtion_Map.get(topic).get(username);
+        return topic_Subscribtion_Map.get(topic).get(connectionId_User_Map.get(connectionId)).toString();
     }
     public List<Integer> GetUserSubIdsSubscribedToTopic(String topic)
     {
         LinkedList<Integer> usernames=new LinkedList();
         for(User user:topic_Subscribtion_Map.get(topic).keySet())
-            usernames.add(topic_Subscribtion_Map.get(topic).get(user));
+            usernames.add(user.getConnectionId());
         return usernames;
     }
 
 
-    public int getAndIncreaseMessageCounter() {
+    public Integer getAndIncreaseMessageCounter() {
         return messageCounter.getAndIncrement();
 
     }
+
 }
