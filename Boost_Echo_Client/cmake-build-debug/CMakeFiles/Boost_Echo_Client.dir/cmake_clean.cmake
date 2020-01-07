@@ -1,8 +1,12 @@
 file(REMOVE_RECURSE
+  "Boost_Echo_Client"
+  "Boost_Echo_Client.pdb"
+  "CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o"
+  "CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o"
+  "CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o"
   "CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.o"
   "CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o"
-  "Boost_Echo_Client.pdb"
-  "Boost_Echo_Client"
+  "CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.
