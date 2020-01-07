@@ -21,24 +21,12 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
         database = DataBase.getInstance();
     }
     @Override
-    public String process(String message){
+    public void process(String message){
         StompFrame frame = StompFrame.parse(message);
         switch (frame.getCommand()){
             case CONNECT:
-                CONNECT_received(frame.getHeaders(), frame.getBody());
+                CONNECT_received(frame.getHeaders());
                 break;
-//            case CONNECTED:
-//                CONNECTED_received(frame.getHeaders(), frame.getBody());
-//                break;
-//            case MESSAGE:
-//                MESSAGE_received(frame.getHeaders(), frame.getBody());
-//                break;
-//            case RECEIPT:
-//                RECEIPT_received(frame.getHeaders(), frame.getBody());
-//                break;
-//            case ERROR:
-//                ERROR_received(frame.getHeaders(), frame.getBody());
-//                break;
             case SEND:
                 SEND_received(frame.getHeaders(), frame.getBody());
                 break;
@@ -52,9 +40,9 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
                 DISCONNECT_received(frame.getHeaders(), frame.getBody());
                 break;
         }
-        return null;
+
     }
-    private void CONNECT_received(HashMap<String,String> headers, String body){
+    private void CONNECT_received(HashMap<String,String> headers){
         //deal with accept-version?
         //deal with host?
         String username = headers.get("login");
@@ -78,10 +66,6 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
         }
 
     }
-//    private void CONNECTED_received(HashMap<String,String> headers, String body){}
-//    private void MESSAGE_received(HashMap<String,String> headers, String body){}
-//    private void RECEIPT_received(HashMap<String,String> headers, String body){}
-//    private void ERROR_received(HashMap<String,String> headers, String body){}
     private void SEND_received(HashMap<String,String> headers, String body){
         StompFrame message = new StompFrame();
         for(int connectionId:database.GetUserSubIdsSubscribedToTopic(headers.get("destination")))
@@ -105,8 +89,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
             connections.send(connectionId, frame.toString());
         }
     }
-    private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body)
-    {
+    private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body) {
         database.Subscribe(headers.get("destination"),headers.get("id"),connectionId);
         //add subscription to connections
         StompFrame frame = new StompFrame();
