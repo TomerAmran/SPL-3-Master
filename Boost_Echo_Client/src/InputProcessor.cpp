@@ -24,7 +24,7 @@ std::string InputProcessor::process(std::string input) {
     } else if (words[0] == "status") {
         output=   status(words);
     } else if (words[0]=="exit"){
-
+        output=unsubscribe(words);
     }else if (words[0] == "logout") {
         StompFrame frame=StompFrame();
         frame.setCommand(DISCONNECT);
