@@ -96,35 +96,9 @@ CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Inventory.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s
 
-CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
-CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o: ../src/StompEncoderDecoder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompEncoderDecoder.cpp
-
-CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompEncoderDecoder.cpp > CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.i
-
-CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompEncoderDecoder.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.s
-
-CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
-CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o: ../src/protocol.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/protocol.cpp
-
-CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/protocol.cpp > CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.i
-
-CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/protocol.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.s
-
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../src/StompFrame.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp
 
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.i: cmake_force
@@ -140,8 +114,6 @@ Boost_Echo_Client_OBJECTS = \
 "CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o" \
-"CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o" \
-"CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o"
 
 # External object files for target Boost_Echo_Client
@@ -150,8 +122,6 @@ Boost_Echo_Client_EXTERNAL_OBJECTS =
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o
-Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o
-Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/build.make
 Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_system.so
@@ -161,7 +131,7 @@ Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
 Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
 Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Boost_Echo_Client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Boost_Echo_Client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Boost_Echo_Client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

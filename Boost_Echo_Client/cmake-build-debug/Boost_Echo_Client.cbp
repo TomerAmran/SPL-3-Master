@@ -93,22 +93,13 @@
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/Inventory.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/StompEncoderDecoder.h">
-			<Option target="Boost_Echo_Client"/>
-		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/StompFrame.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/connectionHandler.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/protocol.h">
-			<Option target="Boost_Echo_Client"/>
-		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Inventory.cpp">
-			<Option target="Boost_Echo_Client"/>
-		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompEncoderDecoder.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp">
@@ -118,9 +109,6 @@
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/echoClient.cpp">
-			<Option target="Boost_Echo_Client"/>
-		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/protocol.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/CMakeLists.txt">

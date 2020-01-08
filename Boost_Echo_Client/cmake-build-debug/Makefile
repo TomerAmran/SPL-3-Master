@@ -150,33 +150,6 @@ src/Inventory.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s
 .PHONY : src/Inventory.cpp.s
 
-src/StompEncoderDecoder.o: src/StompEncoderDecoder.cpp.o
-
-.PHONY : src/StompEncoderDecoder.o
-
-# target to build an object file
-src/StompEncoderDecoder.cpp.o:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.o
-.PHONY : src/StompEncoderDecoder.cpp.o
-
-src/StompEncoderDecoder.i: src/StompEncoderDecoder.cpp.i
-
-.PHONY : src/StompEncoderDecoder.i
-
-# target to preprocess a source file
-src/StompEncoderDecoder.cpp.i:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.i
-.PHONY : src/StompEncoderDecoder.cpp.i
-
-src/StompEncoderDecoder.s: src/StompEncoderDecoder.cpp.s
-
-.PHONY : src/StompEncoderDecoder.s
-
-# target to generate assembly for a file
-src/StompEncoderDecoder.cpp.s:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompEncoderDecoder.cpp.s
-.PHONY : src/StompEncoderDecoder.cpp.s
-
 src/StompFrame.o: src/StompFrame.cpp.o
 
 .PHONY : src/StompFrame.o
@@ -258,33 +231,6 @@ src/echoClient.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s
 .PHONY : src/echoClient.cpp.s
 
-src/protocol.o: src/protocol.cpp.o
-
-.PHONY : src/protocol.o
-
-# target to build an object file
-src/protocol.cpp.o:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.o
-.PHONY : src/protocol.cpp.o
-
-src/protocol.i: src/protocol.cpp.i
-
-.PHONY : src/protocol.i
-
-# target to preprocess a source file
-src/protocol.cpp.i:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.i
-.PHONY : src/protocol.cpp.i
-
-src/protocol.s: src/protocol.cpp.s
-
-.PHONY : src/protocol.s
-
-# target to generate assembly for a file
-src/protocol.cpp.s:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/protocol.cpp.s
-.PHONY : src/protocol.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -297,9 +243,6 @@ help:
 	@echo "... src/Inventory.o"
 	@echo "... src/Inventory.i"
 	@echo "... src/Inventory.s"
-	@echo "... src/StompEncoderDecoder.o"
-	@echo "... src/StompEncoderDecoder.i"
-	@echo "... src/StompEncoderDecoder.s"
 	@echo "... src/StompFrame.o"
 	@echo "... src/StompFrame.i"
 	@echo "... src/StompFrame.s"
@@ -309,9 +252,6 @@ help:
 	@echo "... src/echoClient.o"
 	@echo "... src/echoClient.i"
 	@echo "... src/echoClient.s"
-	@echo "... src/protocol.o"
-	@echo "... src/protocol.i"
-	@echo "... src/protocol.s"
 .PHONY : help
 
 
