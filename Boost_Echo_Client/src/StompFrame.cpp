@@ -10,6 +10,7 @@ StompFrame::StompFrame():headers(std::map<std::string,std::string>()) {
     string_Enum_Convertor.insert(std::make_pair("CONNECTED",CONNECTED));
     string_Enum_Convertor.insert(std::make_pair("RECEIPT",RECEIPT));
     string_Enum_Convertor.insert(std::make_pair("MESSAGE",MESSAGE));
+    string_Enum_Convertor.insert(std::make_pair("ERROR",ERROR));
 }
 
 void StompFrame::parse(std::string msg) {

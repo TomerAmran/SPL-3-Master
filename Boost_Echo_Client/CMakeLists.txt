@@ -15,8 +15,8 @@ include_directories(bin)
 include_directories(include)
 include_directories(src)
 add_executable(Boost_Echo_Client
-        include/connectionHandler.h
-        src/connectionHandler.cpp
+        include/ConnectionHandler.h
+        src/ConnectionHandler.cpp
         src/echoClient.cpp
-        src/Inventory.cpp include/Inventory.h src/StompFrame.cpp include/StompFrame.h)
+        src/Database.cpp include/Database.h src/StompFrame.cpp include/StompFrame.h src/Protocol.cpp include/Protocol.h src/InputProcessor.cpp include/InputProcessor.h)
 target_link_libraries(Boost_Echo_Client LINK_PUBLIC ${Boost_LIBRARIES} )

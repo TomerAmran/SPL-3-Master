@@ -123,6 +123,60 @@ Boost_Echo_Client/fast:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/build
 .PHONY : Boost_Echo_Client/fast
 
+src/ConnectionHandler.o: src/ConnectionHandler.cpp.o
+
+.PHONY : src/ConnectionHandler.o
+
+# target to build an object file
+src/ConnectionHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o
+.PHONY : src/ConnectionHandler.cpp.o
+
+src/ConnectionHandler.i: src/ConnectionHandler.cpp.i
+
+.PHONY : src/ConnectionHandler.i
+
+# target to preprocess a source file
+src/ConnectionHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.i
+.PHONY : src/ConnectionHandler.cpp.i
+
+src/ConnectionHandler.s: src/ConnectionHandler.cpp.s
+
+.PHONY : src/ConnectionHandler.s
+
+# target to generate assembly for a file
+src/ConnectionHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.s
+.PHONY : src/ConnectionHandler.cpp.s
+
+src/InputProcessor.o: src/InputProcessor.cpp.o
+
+.PHONY : src/InputProcessor.o
+
+# target to build an object file
+src/InputProcessor.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o
+.PHONY : src/InputProcessor.cpp.o
+
+src/InputProcessor.i: src/InputProcessor.cpp.i
+
+.PHONY : src/InputProcessor.i
+
+# target to preprocess a source file
+src/InputProcessor.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.i
+.PHONY : src/InputProcessor.cpp.i
+
+src/InputProcessor.s: src/InputProcessor.cpp.s
+
+.PHONY : src/InputProcessor.s
+
+# target to generate assembly for a file
+src/InputProcessor.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.s
+.PHONY : src/InputProcessor.cpp.s
+
 src/Inventory.o: src/Inventory.cpp.o
 
 .PHONY : src/Inventory.o
@@ -150,6 +204,33 @@ src/Inventory.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s
 .PHONY : src/Inventory.cpp.s
 
+src/Protocol.o: src/Protocol.cpp.o
+
+.PHONY : src/Protocol.o
+
+# target to build an object file
+src/Protocol.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o
+.PHONY : src/Protocol.cpp.o
+
+src/Protocol.i: src/Protocol.cpp.i
+
+.PHONY : src/Protocol.i
+
+# target to preprocess a source file
+src/Protocol.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i
+.PHONY : src/Protocol.cpp.i
+
+src/Protocol.s: src/Protocol.cpp.s
+
+.PHONY : src/Protocol.s
+
+# target to generate assembly for a file
+src/Protocol.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s
+.PHONY : src/Protocol.cpp.s
+
 src/StompFrame.o: src/StompFrame.cpp.o
 
 .PHONY : src/StompFrame.o
@@ -176,33 +257,6 @@ src/StompFrame.s: src/StompFrame.cpp.s
 src/StompFrame.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s
 .PHONY : src/StompFrame.cpp.s
-
-src/connectionHandler.o: src/connectionHandler.cpp.o
-
-.PHONY : src/connectionHandler.o
-
-# target to build an object file
-src/connectionHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.o
-.PHONY : src/connectionHandler.cpp.o
-
-src/connectionHandler.i: src/connectionHandler.cpp.i
-
-.PHONY : src/connectionHandler.i
-
-# target to preprocess a source file
-src/connectionHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.i
-.PHONY : src/connectionHandler.cpp.i
-
-src/connectionHandler.s: src/connectionHandler.cpp.s
-
-.PHONY : src/connectionHandler.s
-
-# target to generate assembly for a file
-src/connectionHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.s
-.PHONY : src/connectionHandler.cpp.s
 
 src/echoClient.o: src/echoClient.cpp.o
 
@@ -240,15 +294,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Boost_Echo_Client"
 	@echo "... edit_cache"
+	@echo "... src/ConnectionHandler.o"
+	@echo "... src/ConnectionHandler.i"
+	@echo "... src/ConnectionHandler.s"
+	@echo "... src/InputProcessor.o"
+	@echo "... src/InputProcessor.i"
+	@echo "... src/InputProcessor.s"
 	@echo "... src/Inventory.o"
 	@echo "... src/Inventory.i"
 	@echo "... src/Inventory.s"
+	@echo "... src/Protocol.o"
+	@echo "... src/Protocol.i"
+	@echo "... src/Protocol.s"
 	@echo "... src/StompFrame.o"
 	@echo "... src/StompFrame.i"
 	@echo "... src/StompFrame.s"
-	@echo "... src/connectionHandler.o"
-	@echo "... src/connectionHandler.i"
-	@echo "... src/connectionHandler.s"
 	@echo "... src/echoClient.o"
 	@echo "... src/echoClient.i"
 	@echo "... src/echoClient.s"
