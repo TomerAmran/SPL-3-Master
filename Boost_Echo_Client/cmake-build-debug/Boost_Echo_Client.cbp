@@ -102,6 +102,9 @@
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/Protocol.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/ServerTask.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/StompFrame.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
@@ -117,10 +120,13 @@
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp">
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/ServerTask.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/echoClient.cpp">
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompClient.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/CMakeLists.txt">

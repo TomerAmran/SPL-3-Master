@@ -19,9 +19,21 @@ CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../include/Protocol.h
 CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../include/StompFrame.h
 CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../src/Protocol.cpp
 
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: ../include/ConnectionHandler.h
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: ../include/Database.h
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: ../include/Protocol.h
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: ../include/ServerTask.h
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: ../include/StompFrame.h
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: ../src/ServerTask.cpp
+
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../include/ConnectionHandler.h
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../include/Database.h
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../include/InputProcessor.h
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../include/Protocol.h
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../include/ServerTask.h
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../include/StompFrame.h
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../src/StompClient.cpp
+
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../include/StompFrame.h
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../src/StompFrame.cpp
-
-CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o: ../include/ConnectionHandler.h
-CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o: ../src/echoClient.cpp
 

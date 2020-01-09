@@ -7,6 +7,7 @@
 #include <list>
 #include <unordered_map>
 #include <string>
+#include <mutex>
 #include "StompFrame.h"
 
 class Database {
@@ -39,6 +40,9 @@ private:
     std::list<std::string > want_TO_Borrow;
     std::string name;
     std::unordered_map<std::string,StompFrame*> reciept_Frame_map;
+    std:: mutex genre_book_lock;
+    std:: mutex want_to_borrow_lock;
+    std::mutex reciept_frame_lock;
     void addGenre(std::string genre);
 };
 

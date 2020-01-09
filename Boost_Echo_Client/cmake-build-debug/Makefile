@@ -231,6 +231,60 @@ src/Protocol.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s
 .PHONY : src/Protocol.cpp.s
 
+src/ServerTask.o: src/ServerTask.cpp.o
+
+.PHONY : src/ServerTask.o
+
+# target to build an object file
+src/ServerTask.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o
+.PHONY : src/ServerTask.cpp.o
+
+src/ServerTask.i: src/ServerTask.cpp.i
+
+.PHONY : src/ServerTask.i
+
+# target to preprocess a source file
+src/ServerTask.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.i
+.PHONY : src/ServerTask.cpp.i
+
+src/ServerTask.s: src/ServerTask.cpp.s
+
+.PHONY : src/ServerTask.s
+
+# target to generate assembly for a file
+src/ServerTask.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.s
+.PHONY : src/ServerTask.cpp.s
+
+src/StompClient.o: src/StompClient.cpp.o
+
+.PHONY : src/StompClient.o
+
+# target to build an object file
+src/StompClient.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o
+.PHONY : src/StompClient.cpp.o
+
+src/StompClient.i: src/StompClient.cpp.i
+
+.PHONY : src/StompClient.i
+
+# target to preprocess a source file
+src/StompClient.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.i
+.PHONY : src/StompClient.cpp.i
+
+src/StompClient.s: src/StompClient.cpp.s
+
+.PHONY : src/StompClient.s
+
+# target to generate assembly for a file
+src/StompClient.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.s
+.PHONY : src/StompClient.cpp.s
+
 src/StompFrame.o: src/StompFrame.cpp.o
 
 .PHONY : src/StompFrame.o
@@ -258,33 +312,6 @@ src/StompFrame.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s
 .PHONY : src/StompFrame.cpp.s
 
-src/echoClient.o: src/echoClient.cpp.o
-
-.PHONY : src/echoClient.o
-
-# target to build an object file
-src/echoClient.cpp.o:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o
-.PHONY : src/echoClient.cpp.o
-
-src/echoClient.i: src/echoClient.cpp.i
-
-.PHONY : src/echoClient.i
-
-# target to preprocess a source file
-src/echoClient.cpp.i:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.i
-.PHONY : src/echoClient.cpp.i
-
-src/echoClient.s: src/echoClient.cpp.s
-
-.PHONY : src/echoClient.s
-
-# target to generate assembly for a file
-src/echoClient.cpp.s:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s
-.PHONY : src/echoClient.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -306,12 +333,15 @@ help:
 	@echo "... src/Protocol.o"
 	@echo "... src/Protocol.i"
 	@echo "... src/Protocol.s"
+	@echo "... src/ServerTask.o"
+	@echo "... src/ServerTask.i"
+	@echo "... src/ServerTask.s"
+	@echo "... src/StompClient.o"
+	@echo "... src/StompClient.i"
+	@echo "... src/StompClient.s"
 	@echo "... src/StompFrame.o"
 	@echo "... src/StompFrame.i"
 	@echo "... src/StompFrame.s"
-	@echo "... src/echoClient.o"
-	@echo "... src/echoClient.i"
-	@echo "... src/echoClient.s"
 .PHONY : help
 
 

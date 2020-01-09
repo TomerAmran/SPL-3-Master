@@ -15,15 +15,19 @@ Database::Database(): genre_Book_Map(std::unordered_map<std::string ,std::list<s
                                         book_Loaner_Map(std::unordered_map<std::string,std::string> ()),
                                         genre_SubId_map(std::unordered_map<std::string,std::string> ()),
                                         want_TO_Borrow(std::list<std::string>()),name(""),
-                                        reciept_Frame_map(std::unordered_map<std::string,StompFrame*>()){}
+                                        reciept_Frame_map(std::unordered_map<std::string,StompFrame*>()),
+                                        genre_book_lock(),want_to_borrow_lock(),reciept_frame_lock()
+                                        {}
 
 void Database::addGenre(std::string genre,std::string subId)
 {
+    std::lock_guard<std::mutex> lock(genre_book_lock);
     genre_Book_Map.insert(std::make_pair(genre,std::list<std::string>()));
     genre_SubId_map.insert(std::make_pair(subId,genre));
 }
 void Database:: addBook(std::string genre, std::string book_Name)
 {
+    std::lock_guard<std::mutex> lock(genre_book_lock);
     if(genre_Book_Map.find(genre)==genre_Book_Map.end())
     {
         this->addGenre(genre);
@@ -33,6 +37,7 @@ void Database:: addBook(std::string genre, std::string book_Name)
 }
 void Database::addBorrowedBook(std::string genre, std::string book_Name, std::string loaner_Name)
 {
+    std::lock_guard<std::mutex> lock(genre_book_lock);
     this->addBook(genre, book_Name);
     book_Loaner_Map.insert(std::make_pair(book_Name,loaner_Name));
 
@@ -43,6 +48,7 @@ void Database::lendBook(std::string genre, std::string book_Name)
 }
 bool Database::contains(std::string genre, std::string book_Name)
 {
+    std::lock_guard<std::mutex> lock(genre_book_lock);
     std::list<std::string> l=genre_Book_Map[genre];
     for(auto book:l)
     {
@@ -55,11 +61,13 @@ bool Database::contains(std::string genre, std::string book_Name)
 
 void Database:: deleteBook(std::string genre, std::string book)
 {
+    std::lock_guard<std::mutex> lock(genre_book_lock);
     std::list<std::string> l=genre_Book_Map[genre];
     l.remove(book);
 }
 
 bool Database::wantedToBorrow(std::string book) {
+
     for(auto bookname:want_TO_Borrow) {
         if (bookname == book)
             return true;
@@ -76,10 +84,12 @@ std::string Database::getName() {
 }
 
 void Database::addReciept(std::string recieptId, StompFrame* frame) {
+    std::lock_guard<std::mutex> lock(reciept_frame_lock);
     reciept_Frame_map.insert(std::make_pair(recieptId, frame));
 }
 
 void Database::addToBorrowList(std::string book) {
+    std::lock_guard<std::mutex> lock(want_to_borrow_lock);
     want_TO_Borrow.push_back(book);
 }
 
@@ -92,7 +102,8 @@ StompFrame* Database::getReciept(std::string id) {
 }
 
 void Database::removeReciept(std::string id) {
-   StompFrame* frame= reciept_Frame_map[id];
+    std::lock_guard<std::mutex> lock(reciept_frame_lock);
+    StompFrame* frame= reciept_Frame_map[id];
     delete frame;
     frame= nullptr;
     reciept_Frame_map.erase(id);

@@ -26,11 +26,7 @@ std::string InputProcessor::process(std::string input) {
     } else if (words[0]=="exit"){
         output=unsubscribe(words);
     }else if (words[0] == "logout") {
-        StompFrame* frame=new StompFrame();
-        frame->setCommand(DISCONNECT);
-        frame->addHeader("receipt",std::to_string(receipt_counter));
-        output=frame->toString();
-        Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+        output=logout(words);
     }
     return output;
 }
@@ -39,9 +35,9 @@ std::string InputProcessor::login(std::vector<std::string> &words) {
     StompFrame frame=StompFrame();
     frame.setCommand(CONNECT);
     frame.addHeader("accept-version","1.2");
-    frame.addHeader("login",words[3]);
-    frame.addHeader("passcode",words[4]);
-    Database::getInstance()->setName(words[3]);
+    frame.addHeader("login",words[2]);
+    frame.addHeader("passcode",words[3]);
+    Database::getInstance()->setName(words[2]);
     return frame.toString();
 }
 
@@ -117,6 +113,14 @@ std::vector<std::string> InputProcessor::split_string_to_words_vector(std::strin
     std::vector<std::string> words(std::istream_iterator<std::string>{iss},
                                    std::istream_iterator<std::string>());
     return words;
+}
+
+std::pair<std::string, short> InputProcessor::get_hostnip(std::string input) {
+    //to correct;
+    int split=input.find(':');
+    std::string host=input.substr(6,split-6);
+    short port=std::stoi(input.substr(split+1,4));
+    return std::make_pair(host,port);
 }
 
 

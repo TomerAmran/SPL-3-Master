@@ -1,11 +1,14 @@
 #include <stdlib.h>
 #include <ConnectionHandler.h>
+#include <thread>
+#include <ServerTask.h>
+#include <InputProcessor.h>
 
 /**
 * This code assumes that the server replies the exact text the client sent it (as opposed to the practical session example)
 */
 int main (int argc, char *argv[]) {
-    if (argc < 3) {
+    /*if (argc < 3) {
         std::cerr << "Usage: " << argv[0] << " host port" << std::endl << std::endl;
         return -1;
     }
@@ -54,6 +57,67 @@ int main (int argc, char *argv[]) {
             std::cout << "Exiting...\n" << std::endl;
             break;
         }
+    }*/
+    std::string input;
+    ConnectionHandler* handler= nullptr;
+    InputProcessor processor();
+    std::getline(std::cin, input);
+    while (1) {
+        std::cout << "you are not connected" << std::endl;
+        input = "";
+        std::getline(std::cin, input);
+        if (input.find("Login") != std::string::npos) {
+            std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(input);
+            handler=new ConnectionHandler(handlerdata.first, handlerdata.second);
+            if (handler->connect()) {
+                break;
+            }
+        }
     }
+    /* std::string msg;
+     processor.process(input);
+    // ServerTask task(*handler);
+     //std::thread t1(&ServerTask::run, &task);
+     while (1) {
+         input = "";
+         std::getline(std::cin, input);
+         std::string output = processor.process(input);
+         if (output.find("Disconnect") != std::string::npos) {
+             break;
+         }std::string input;
+     ConnectionHandler* handler= nullptr;
+     InputProcessor processor;
+     std::getline(std::cin, input);
+     while (1) {
+         std::cout << "you are not connected" << std::endl;
+         input = "";
+         std::getline(std::cin, input);
+         if (input.find("Login") != std::string::npos) {
+             std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(input);
+             handler=new ConnectionHandler(handlerdata.first, handlerdata.second);
+             if (handler->connect()) {
+                 break;
+             }
+         }
+     }
+     std::string msg;
+     processor.process(input);
+     ServerTask task(*handler);
+     std::thread t1(&ServerTask::run, &task);
+     while (1) {
+         input = "";
+         std::getline(std::cin, input);
+         std::string output = processor.process(input);
+         if (output.find("Disconnect") != std::string::npos) {
+             break;
+         }
+     }
+     t1.join();
+    // delete Database::getInstance();
+     delete handler;
+     return 0;
+     }
+     //t1.join();
+     delete Database::getInstance();*/
     return 0;
 }

@@ -6,22 +6,23 @@
 
 Protocol::Protocol(ConnectionHandler &handler) : handler(handler) {}
 
-void Protocol::processServer(std::string msg) {
+bool Protocol::processServer(std::string msg) {
     StompFrame frame = StompFrame();
     frame.parse(msg);
+    bool logout=false;
     if (frame.getCommand() == CONNECTED) {
         connected();
     } else if (frame.getCommand() == ERROR) {
         error(frame.getBody());
     } else if (frame.getCommand() == RECEIPT) {
-        reciept(frame.getHeaders()["receipt-id"]);
+        logout = reciept(frame.getHeaders()["receipt-id"]);
     } else if (frame.getCommand() == MESSAGE) {
         message(frame);
     }
 
 }
 
-std::vector<std::string> Protocol::split_string_to_words_vector(const std::string& string) {
+std::vector<std::string> Protocol::split_string_to_words_vector(const std::string &string) {
     std::istringstream iss(string);
     std::vector<std::string> words(std::istream_iterator<std::string>{iss},
                                    std::istream_iterator<std::string>());
@@ -37,16 +38,19 @@ void Protocol::error(std::string errormsg) {
 //to-do
 }
 
-void Protocol::reciept(const std::string& id) {
+bool Protocol::reciept(const std::string &id) {
     StompFrame *frame = Database::getInstance()->getReciept(id);
+    bool logout = false;
     if (frame->getCommand() == SUBSCRIBE)
         std::cout << "Joind club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == UNSUBSCIRBE)
         std::cout << "Exited club " << frame->getHeaders()["destination"] << std::endl;
-    else if (frame->getCommand() == DISCONNECT)
-        handler.close();
-    frame = nullptr;
-    Database::getInstance()->removeReciept(id);
+    else if (frame->getCommand() == DISCONNECT) {
+        frame = nullptr;
+        Database::getInstance()->removeReciept(id);
+        logout=true;
+    }
+    return logout;
 }
 
 void Protocol::message(StompFrame &frame) {
@@ -58,19 +62,24 @@ void Protocol::message(StompFrame &frame) {
             borrow(frame.getBody(), frame.getHeaders()["destination"]);
         }
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
+    } else if (words[1] == "wish") {
+        contains(frame.getHeaders()["destination"], words[4]);
+        std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
     } else if ((words[0] == "Taking") & (words[3] == Database::getInstance()->getName())) {
-        lend(frame.getHeaders().find("destination")->second, words[1]);
+        lend(frame.getHeaders()["destination"], words[1]);
         std::cout << frame.getBody() << std::endl;
     } else if ((words[0] == "Returning") & (words[3] == Database::getInstance()->getName())) {
         getBack(frame.getHeaders()["destination"], words[1]);
     } else if (words[1] == "status") {
         status(frame.getHeaders()["destination"]);
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
+    } else {
+        std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
     }
 
 }
 
-void Protocol::borrow(std::string msg, const std::string& genre) {
+void Protocol::borrow(std::string msg, const std::string &genre) {
     std::vector<std::string> words = split_string_to_words_vector(msg);
     Database::getInstance()->addBorrowedBook(genre, words[2], words[0]);
     StompFrame frame = StompFrame();
@@ -90,15 +99,25 @@ void Protocol::status(std::string genre) {
     frame.setCommand(SEND);
     frame.addHeader("destination", genre);
     std::string status = Database::getInstance()->getName() + ":";
-    for (const auto& book:books) {
+    for (const auto &book:books) {
         status += book + ",";
     }
-    status.resize(status.size()-1);
+    status.resize(status.size() - 1);
     frame.setBody(status);
     handler.sendFrameAscii(frame.toString(), '\0');
 }
 
 void Protocol::getBack(std::string genre, std::string book) {
     Database::getInstance()->addBook(genre, book);
+}
+
+void Protocol::contains(std::string genre, std::string book) {
+    if (Database::getInstance()->contains(genre, book)) {
+        StompFrame frame = StompFrame();
+        frame.setCommand(SEND);
+        frame.addHeader("destination", genre);
+        frame.setBody(Database::getInstance()->getName() + " has " + book);
+        handler.sendFrameAscii(frame.toString(), '\0');
+    }
 }
 

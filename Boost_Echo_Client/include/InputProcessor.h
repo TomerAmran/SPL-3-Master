@@ -8,10 +8,12 @@
 #include <vector>
 #include <string>
 class InputProcessor {
+public:
     InputProcessor();
     std::string process(std::string input);
+    static std::vector<std::string> split_string_to_words_vector(std::string string);
+    static std::pair<std::string,short> get_hostnip(std::string);
 private:
-    std::vector<std::string> split_string_to_words_vector(std::string string);
     std::string login(std::vector<std::string>& words);
     std::string subscribe(std::vector<std::string>& words);
     std::string unsubscribe(std::vector<std::string>& words);
