@@ -4,13 +4,20 @@
 CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o: ../include/ConnectionHandler.h
 CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o: ../src/ConnectionHandler.cpp
 
-CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o: ../include/Inventory.h
-CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o: ../src/Inventory.cpp
+CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o: ../include/Database.h
+CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o: ../include/StompFrame.h
+CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o: ../src/Database.cpp
+
+CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o: ../include/Database.h
+CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o: ../include/InputProcessor.h
+CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o: ../include/StompFrame.h
+CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o: ../src/InputProcessor.cpp
 
 CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../include/ConnectionHandler.h
-CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../include/Inventory.h
+CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../include/Database.h
+CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../include/Protocol.h
+CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../include/StompFrame.h
 CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../src/Protocol.cpp
-CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../src/Protocol.h
 
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../include/StompFrame.h
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../src/StompFrame.cpp

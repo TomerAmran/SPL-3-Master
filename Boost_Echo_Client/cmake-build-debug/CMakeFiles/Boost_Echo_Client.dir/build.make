@@ -83,18 +83,18 @@ CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/echoClient.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s
 
-CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
-CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o: ../src/Inventory.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Inventory.cpp
+CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
+CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o: ../src/Database.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Database.cpp
 
-CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Inventory.cpp > CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.i
+CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Database.cpp > CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.i
 
-CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Inventory.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s
+CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Database.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.s
 
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
 CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../src/StompFrame.cpp
@@ -139,7 +139,7 @@ CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.s: cmake_force
 Boost_Echo_Client_OBJECTS = \
 "CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o" \
-"CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o" \
+"CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o"
@@ -149,7 +149,7 @@ Boost_Echo_Client_EXTERNAL_OBJECTS =
 
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o
-Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o
+Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o

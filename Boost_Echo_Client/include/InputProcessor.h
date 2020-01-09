@@ -22,7 +22,7 @@ private:
     std::string logout(std::vector<std::string>& words);
     int receipt_counter;
     int subId_counter;
-    std::string username;
+
 
 };
 

@@ -93,7 +93,13 @@
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/ConnectionHandler.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/Inventory.h">
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/Database.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/InputProcessor.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/Protocol.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/include/StompFrame.h">
@@ -102,19 +108,13 @@
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/ConnectionHandler.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
+		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Database.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/InputProcessor.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/InputProcessor.h">
-			<Option target="Boost_Echo_Client"/>
-		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Inventory.cpp">
-			<Option target="Boost_Echo_Client"/>
-		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp">
-			<Option target="Boost_Echo_Client"/>
-		</Unit>
-		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.h">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp">

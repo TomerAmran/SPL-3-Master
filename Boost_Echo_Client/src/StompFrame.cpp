@@ -6,14 +6,15 @@
 #include <sstream>
 #include "StompFrame.h"
 
-StompFrame::StompFrame():headers(std::map<std::string,std::string>()) {
+StompFrame::StompFrame(): command(),headers(std::map<std::string,std::string>()),
+                          body(""),string_Enum_Convertor(std::map<std::string,Command>()){
     string_Enum_Convertor.insert(std::make_pair("CONNECTED",CONNECTED));
     string_Enum_Convertor.insert(std::make_pair("RECEIPT",RECEIPT));
     string_Enum_Convertor.insert(std::make_pair("MESSAGE",MESSAGE));
     string_Enum_Convertor.insert(std::make_pair("ERROR",ERROR));
 }
 
-void StompFrame::parse(std::string msg) {
+void StompFrame::parse(const std::string msg) {
     std::vector<std::string> lines;
     std::istringstream stream(msg);
     std::string line;
@@ -22,7 +23,7 @@ void StompFrame::parse(std::string msg) {
     }
     command=string_Enum_Convertor[lines[0]];
     int i=1;
-    while(lines[i]!="")
+    while((unsigned )i<lines.size()&&lines[i]!="")
     {
         int split=lines[i].find(':');
         headers.insert(std::make_pair(lines[i].substr(0,split),lines[i].substr(split+1,lines[i].size())));
@@ -32,12 +33,11 @@ void StompFrame::parse(std::string msg) {
 }
 
 std::string StompFrame::toString() {
-
     std::string output;
     output=command+"\n";
     for(auto  p:headers)
     {
-        output=output+p.first+p.second+"\n";
+        output=output+p.first+":"+p.second+"\n";
 
     }
     output=output+""+"\n";

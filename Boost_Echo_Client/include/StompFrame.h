@@ -16,7 +16,7 @@ enum Command{
 class StompFrame {
 public:
     StompFrame();
-    void parse(std::string msg);
+    void parse(const std::string msg);
     std::string toString();
     void setCommand(Command command);
     void setBody(std::string body);

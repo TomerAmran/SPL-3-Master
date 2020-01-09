@@ -10,14 +10,20 @@
 
 class Protocol {
 public:
-    Protocol(Database& inventory, ConnectionHandler& handler);
-    void processKeybord(std::string input);
-    void processServer(std::string msg);
+    Protocol(ConnectionHandler& handler);
+   void processServer(std::string msg);
 private:
-    Database& inventory;
     ConnectionHandler& handler;
-    std::string username;
-    std::vector<std::string> split_string_to_words_vector(std::string string);
+    std::vector<std::string> split_string_to_words_vector(const std::string& string);
+    void connected();
+    void error(std::string errormsg);
+    void reciept(const std::string& id);
+    void message(StompFrame& frame);
+    void borrow(std::string msg,const std::string& genre);
+    void lend(std::string genre,std::string book);
+    void status(std::string genre);
+    void getBack(std::string genre, std::string book);
+
 
 
 };

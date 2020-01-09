@@ -11,7 +11,11 @@ Database *Database::getInstance() {
     }
     return Database::instance;
 }
-Database::Database(): genre_Book_Map(std::unordered_map<std::string ,std::list<std::string >>()), book_Loaner_Map(std::unordered_map<std::string,std::string> ()), genre_SubId_map(std::unordered_map<std::string,std::string> ()){}
+Database::Database(): genre_Book_Map(std::unordered_map<std::string ,std::list<std::string >>()),
+                                        book_Loaner_Map(std::unordered_map<std::string,std::string> ()),
+                                        genre_SubId_map(std::unordered_map<std::string,std::string> ()),
+                                        want_TO_Borrow(std::list<std::string>()),name(""),
+                                        reciept_Frame_map(std::unordered_map<std::string,StompFrame*>()){}
 
 void Database::addGenre(std::string genre,std::string subId)
 {
@@ -33,9 +37,9 @@ void Database::addBorrowedBook(std::string genre, std::string book_Name, std::st
     book_Loaner_Map.insert(std::make_pair(book_Name,loaner_Name));
 
 }
-void Database::lendBook(std::string genre, std::string book_Name, std::string borrower_Name)
+void Database::lendBook(std::string genre, std::string book_Name)
 {
-    this->delete_Book(genre, book_Name);
+    this->deleteBook(genre, book_Name);
 }
 bool Database::contains(std::string genre, std::string book_Name)
 {
@@ -49,7 +53,7 @@ bool Database::contains(std::string genre, std::string book_Name)
 }
 
 
-void Database:: delete_Book(std::string genre, std::string book)
+void Database:: deleteBook(std::string genre, std::string book)
 {
     std::list<std::string> l=genre_Book_Map[genre];
     l.remove(book);
@@ -71,8 +75,8 @@ std::string Database::getName() {
     return name;
 }
 
-void Database::addReciept(std::string recieptId, Command command) {
-    reciept_Enum_map.insert(std::make_pair(recieptId,command));
+void Database::addReciept(std::string recieptId, StompFrame* frame) {
+    reciept_Frame_map.insert(std::make_pair(recieptId, frame));
 }
 
 void Database::addToBorrowList(std::string book) {
@@ -80,7 +84,27 @@ void Database::addToBorrowList(std::string book) {
 }
 
 std::string Database::getLoanerName(std::string book) {
-    return std::__cxx11::string();
+    return book_Loaner_Map[book];
 }
+
+StompFrame* Database::getReciept(std::string id) {
+    return reciept_Frame_map[id];
+}
+
+void Database::removeReciept(std::string id) {
+   StompFrame* frame= reciept_Frame_map[id];
+    delete frame;
+    frame= nullptr;
+    reciept_Frame_map.erase(id);
+}
+std::list<std::string> & Database::getBooksByGenre(std::string genre) {
+    return genre_Book_Map[genre];
+}
+
+void Database::addGenre(std::string genre) {
+    genre_Book_Map.insert(std::make_pair(genre,std::list<std::string>()));
+}
+
+
 
 

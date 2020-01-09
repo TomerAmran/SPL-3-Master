@@ -26,11 +26,11 @@ std::string InputProcessor::process(std::string input) {
     } else if (words[0]=="exit"){
         output=unsubscribe(words);
     }else if (words[0] == "logout") {
-        StompFrame frame=StompFrame();
-        frame.setCommand(DISCONNECT);
-        frame.addHeader("receipt",std::to_string(receipt_counter));
-        output=frame.toString();
-        Database::getInstance()->addReciept(std::to_string(receipt_counter),DISCONNECT);
+        StompFrame* frame=new StompFrame();
+        frame->setCommand(DISCONNECT);
+        frame->addHeader("receipt",std::to_string(receipt_counter));
+        output=frame->toString();
+        Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
     }
     return output;
 }
@@ -46,24 +46,24 @@ std::string InputProcessor::login(std::vector<std::string> &words) {
 }
 
 std::string InputProcessor::subscribe(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
-    frame.setCommand(SUBSCRIBE);
-    frame.addHeader("destination",words[1]);
-    frame.addHeader("id",std::to_string(subId_counter));
-    frame.addHeader("receipt",std::to_string(receipt_counter));
+    StompFrame* frame= new StompFrame();
+    frame->setCommand(SUBSCRIBE);
+    frame->addHeader("destination",words[1]);
+    frame->addHeader("id",std::to_string(subId_counter));
+    frame->addHeader("receipt",std::to_string(receipt_counter));
     subId_counter++;
     receipt_counter++;
     Database::getInstance()->addGenre(words[1],std::to_string(subId_counter));
-    Database::getInstance()->addReciept(std::to_string(receipt_counter),SUBSCRIBE);
-    return frame.toString();
+    Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+    return frame->toString();
 
 }
 std::string InputProcessor::unsubscribe(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
-    frame.setCommand(UNSUBSCIRBE);
-    frame.addHeader("receipt",std::to_string(receipt_counter));
-    Database::getInstance()->addReciept(std::to_string(receipt_counter),UNSUBSCIRBE);
-    return frame.toString();
+    StompFrame* frame= new StompFrame();
+    frame->setCommand(UNSUBSCIRBE);
+    frame->addHeader("receipt",std::to_string(receipt_counter));
+    Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+    return frame->toString();
 }
 std::string InputProcessor::addBook(std::vector<std::string> &words) {
     StompFrame frame=StompFrame();
@@ -81,6 +81,7 @@ std::string InputProcessor::borrow(std::vector<std::string> &words) {
     frame.addHeader("destination",words[1]);
     frame.setBody(Database::getInstance()->getName()+" wish to borrow  "+words[2]);
     Database::getInstance()->addToBorrowList(words[2]);
+    return frame.toString();
 }
 
 std::string InputProcessor::returnBook(std::vector<std::string> &words) {
@@ -89,7 +90,7 @@ std::string InputProcessor::returnBook(std::vector<std::string> &words) {
     frame.addHeader("destination",words[1]);
     frame.setBody(+"Returning  "+words[2]+" to "+Database::getInstance()->getLoanerName(words[2]));
     Database::getInstance()->addToBorrowList(words[2]);
-    Database::getInstance()->delete_Book(words[1],words[2]);
+    Database::getInstance()->deleteBook(words[1],words[2]);
     return frame.toString();
 }
 
@@ -103,11 +104,11 @@ std::string InputProcessor::status(std::vector<std::string> &words) {
 }
 
 std::string InputProcessor::logout(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
-    frame.setCommand(DISCONNECT);
-    frame.addHeader("receipt",std::to_string(receipt_counter));
-    Database::getInstance()->addReciept(std::to_string(receipt_counter),DISCONNECT);
-    return frame.toString();
+    StompFrame* frame=new StompFrame();
+    frame->setCommand(DISCONNECT);
+    frame->addHeader("receipt",std::to_string(receipt_counter));
+    Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+    return frame->toString();
 
 };
 
