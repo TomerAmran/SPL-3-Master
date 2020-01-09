@@ -150,6 +150,33 @@ src/ConnectionHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.s
 .PHONY : src/ConnectionHandler.cpp.s
 
+src/Database.o: src/Database.cpp.o
+
+.PHONY : src/Database.o
+
+# target to build an object file
+src/Database.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o
+.PHONY : src/Database.cpp.o
+
+src/Database.i: src/Database.cpp.i
+
+.PHONY : src/Database.i
+
+# target to preprocess a source file
+src/Database.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.i
+.PHONY : src/Database.cpp.i
+
+src/Database.s: src/Database.cpp.s
+
+.PHONY : src/Database.s
+
+# target to generate assembly for a file
+src/Database.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.s
+.PHONY : src/Database.cpp.s
+
 src/InputProcessor.o: src/InputProcessor.cpp.o
 
 .PHONY : src/InputProcessor.o
@@ -176,33 +203,6 @@ src/InputProcessor.s: src/InputProcessor.cpp.s
 src/InputProcessor.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.s
 .PHONY : src/InputProcessor.cpp.s
-
-src/Inventory.o: src/Inventory.cpp.o
-
-.PHONY : src/Inventory.o
-
-# target to build an object file
-src/Inventory.cpp.o:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o
-.PHONY : src/Inventory.cpp.o
-
-src/Inventory.i: src/Inventory.cpp.i
-
-.PHONY : src/Inventory.i
-
-# target to preprocess a source file
-src/Inventory.cpp.i:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.i
-.PHONY : src/Inventory.cpp.i
-
-src/Inventory.s: src/Inventory.cpp.s
-
-.PHONY : src/Inventory.s
-
-# target to generate assembly for a file
-src/Inventory.cpp.s:
-	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.s
-.PHONY : src/Inventory.cpp.s
 
 src/Protocol.o: src/Protocol.cpp.o
 
@@ -297,12 +297,12 @@ help:
 	@echo "... src/ConnectionHandler.o"
 	@echo "... src/ConnectionHandler.i"
 	@echo "... src/ConnectionHandler.s"
+	@echo "... src/Database.o"
+	@echo "... src/Database.i"
+	@echo "... src/Database.s"
 	@echo "... src/InputProcessor.o"
 	@echo "... src/InputProcessor.i"
 	@echo "... src/InputProcessor.s"
-	@echo "... src/Inventory.o"
-	@echo "... src/Inventory.i"
-	@echo "... src/Inventory.s"
 	@echo "... src/Protocol.o"
 	@echo "... src/Protocol.i"
 	@echo "... src/Protocol.s"
