@@ -4,14 +4,20 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/c/Users/Tomer/IdeaProjects/assignment3.tar/SPL3/Boost_Echo_Client/src/connectionHandler.cpp" "/mnt/c/Users/Tomer/IdeaProjects/assignment3.tar/SPL3/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.o"
-  "/mnt/c/Users/Tomer/IdeaProjects/assignment3.tar/SPL3/Boost_Echo_Client/src/echoClient.cpp" "/mnt/c/Users/Tomer/IdeaProjects/assignment3.tar/SPL3/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o"
+  "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/ConnectionHandler.cpp" "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o"
+  "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/InputProcessor.cpp" "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o"
+  "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Inventory.cpp" "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/Inventory.cpp.o"
+  "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp" "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o"
+  "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp" "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o"
+  "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/echoClient.cpp" "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../bin"
   "../include"
+  "../src"
   )
 
 # Targets to which this target links.

@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/Tomer/IdeaProjects/assignment3.tar/SPL3/Boost_Echo_Client
+# Install script for directory: /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/Tomer/IdeaProjects/assignment3.tar/SPL3/Boost_Echo_Client/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
