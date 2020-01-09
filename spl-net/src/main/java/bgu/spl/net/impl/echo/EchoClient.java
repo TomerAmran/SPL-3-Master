@@ -1,16 +1,14 @@
 package bgu.spl.net.impl.echo;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import bgu.spl.net.impl.stomp.StompEncoderDecoder;
+
+import java.io.*;
 import java.net.Socket;
 
 public class EchoClient {
 
     public static void main(String[] args) throws IOException {
-
+        StompEncoderDecoder endc = new StompEncoderDecoder();
         if (args.length == 0) {
             args = new String[]{"localhost", "hello"};
         }
@@ -21,18 +19,32 @@ public class EchoClient {
         }
 
         //BufferedReader and BufferedWriter automatically using UTF-8 encoding
-        try (Socket sock = new Socket(args[0], 7777);
-                BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()))) {
-
+        try (Socket sock = new Socket(args[0], 3000);
+             BufferedInputStream in = new BufferedInputStream(sock.getInputStream());
+             BufferedOutputStream out = new BufferedOutputStream(sock.getOutputStream());) {
+            System.out.println("socketIsNull = " +(sock==null));
             System.out.println("sending message to server");
-            out.write(args[1]);
-            out.newLine();
+
+            out.write(endc.encode("CONNECT\n" +
+                    "accept-version:1.2\n" +
+                    "host:stomp.cs.bgu.ac.il\n" +
+                    "login:bob\n" +
+                    "passcode:alice\n" +
+                    "\n"+
+                    "^@"));
             out.flush();
 
+            int read;
+            while ((read = in.read()) >= 0) {
+                String msg = endc.decodeNextByte((byte) read);
+                if (msg != null) {
+                    System.out.println(msg);
+                }
+            }
+
             System.out.println("awaiting response");
-            String line = in.readLine();
-            System.out.println("message from server: " + line);
+
+
         }
     }
 }

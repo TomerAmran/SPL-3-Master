@@ -11,6 +11,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
     private int connectionId;
     private Connections<String> connections;
     private DataBase database;
+    private Boolean shouldTerminate =false;
     /**
      * Used to initiate the current client protocol with it's personal connection ID and the connections implementation
      **/
@@ -22,6 +23,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
     }
     @Override
     public void process(String message){
+        System.out.println("process called");
         StompFrame frame = StompFrame.parse(message);
         switch (frame.getCommand()){
             case CONNECT:
@@ -108,6 +110,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
             frame.addHeader("receipt-id", headers.get("receipt"));
             connections.send(connectionId, frame.toString());
         }
+        shouldTerminate =true;
 
     }
     private void sendCONNECTED(HashMap<String,String> headers){
@@ -134,6 +137,6 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
      */
     @Override
     public boolean shouldTerminate(){
-        return true;
+        return shouldTerminate;
     }
 }

@@ -31,7 +31,6 @@ public abstract class BaseServer<T> implements Server<T> {
 
     @Override
     public void serve() {
-        System.out.println("lisstening in port "+port);
         try (ServerSocket serverSock = new ServerSocket(port)) {
 			System.out.println("Server started");
 			this.sock = serverSock; //just to be able to close
