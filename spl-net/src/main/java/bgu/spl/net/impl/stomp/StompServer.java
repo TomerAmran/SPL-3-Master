@@ -11,11 +11,9 @@ public class StompServer {
     public static void main(String[] args) throws Exception {
         if (args.length < 2)
             throw new Exception("args should be:<port> <server-type>");
-        int port = Integer.getInteger(args[0]);
+        int port = Integer.parseInt(args[0]);
         String serverType = args[1];
 
-        //intiate DataBase and Connections
-        Connections<String> connection = new ConnectionsImpl<>();
         if (serverType.equals("tpc")){
             Server.threadPerClient(
                     port,
@@ -23,7 +21,15 @@ public class StompServer {
                     StompEncoderDecoder::new //message encoder decoder factory
             ).serve();
         }
-        if (serverType.equals("reactor")){}
+
+        if (serverType.equals("reactor")){
+            Server.reactor(
+                    10,
+                    port,
+                    StompMessagingProtocolImpl::new, //protocol factory
+                    StompEncoderDecoder::new
+            ).serve(); //message encoder decoder factory)
+        }
 
 
 

@@ -45,6 +45,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
     private void CONNECT_received(HashMap<String,String> headers){
         //deal with accept-version?
         //deal with host?
+        System.out.println("conecet recived");
         String username = headers.get("login");
         String passcode = headers.get("passcode");
         //new user
@@ -90,7 +91,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         }
     }
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body) {
-        database.Subscribe(headers.get("destination"),Integer.parseInt(headers.get("id")),connectionId);
+        database.Unsubscribe(Integer.parseInt(headers.get("id")),connectionId);
         //add subscription to connections
         StompFrame frame = new StompFrame();
         if((headers.get("receipt")) != null) {
@@ -99,7 +100,16 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
             connections.send(connectionId,frame.toString());
         }
     }
-    private void DISCONNECT_received(HashMap<String,String> headers, String body){}
+    private void DISCONNECT_received(HashMap<String,String> headers, String body){
+        database.Disconnect(connectionId);
+        if ((headers.get("receipt")) != null) {
+            StompFrame frame = new StompFrame();
+            frame.setCommand("Recipt");
+            frame.addHeader("receipt-id", headers.get("receipt"));
+            connections.send(connectionId, frame.toString());
+        }
+
+    }
     private void sendCONNECTED(HashMap<String,String> headers){
         StompFrame frame = new StompFrame();
         frame.setCommand("CONNECTED");
