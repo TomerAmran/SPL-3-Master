@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(Boost_Echo_Client)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 
 find_package(Boost COMPONENTS system filesystem thread REQUIRED)
 
@@ -17,6 +17,15 @@ include_directories(src)
 add_executable(Boost_Echo_Client
         include/ConnectionHandler.h
         src/ConnectionHandler.cpp
-        src/echoClient.cpp
-        src/Database.cpp include/Database.h src/StompFrame.cpp include/StompFrame.h src/Protocol.cpp include/Protocol.h src/InputProcessor.cpp include/InputProcessor.h)
+        src/Database.cpp
+        src/InputProcessor.cpp
+        include/InputProcessor.h
+        include/Database.h
+        src/Protocol.cpp
+        include/Protocol.h
+        src/StompFrame.cpp
+        include/StompFrame.h
+        src/StompClient.cpp
+        include/ServerTask.h
+        src/ServerTask.cpp)
 target_link_libraries(Boost_Echo_Client LINK_PUBLIC ${Boost_LIBRARIES} )

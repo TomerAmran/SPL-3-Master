@@ -70,22 +70,9 @@ CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/ConnectionHandler.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.s
 
-CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
-CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o: ../src/echoClient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/echoClient.cpp
-
-CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/echoClient.cpp > CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.i
-
-CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/echoClient.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s
-
 CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
 CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o: ../src/Database.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Database.cpp
 
 CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.i: cmake_force
@@ -96,35 +83,9 @@ CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Database.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.s
 
-CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
-CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../src/StompFrame.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp
-
-CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp > CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.i
-
-CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s
-
-CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
-CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../src/Protocol.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp
-
-CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp > CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i
-
-CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s
-
 CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
 CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o: ../src/InputProcessor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/InputProcessor.cpp
 
 CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.i: cmake_force
@@ -135,24 +96,78 @@ CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/InputProcessor.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.s
 
+CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
+CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o: ../src/Protocol.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp
+
+CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp > CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i
+
+CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/Protocol.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s
+
+CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
+CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o: ../src/StompFrame.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp
+
+CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp > CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.i
+
+CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompFrame.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.s
+
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o: ../src/StompClient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompClient.cpp
+
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompClient.cpp > CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.i
+
+CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/StompClient.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.s
+
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: CMakeFiles/Boost_Echo_Client.dir/flags.make
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o: ../src/ServerTask.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o -c /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/ServerTask.cpp
+
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/ServerTask.cpp > CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.i
+
+CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/src/ServerTask.cpp -o CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.s
+
 # Object files for target Boost_Echo_Client
 Boost_Echo_Client_OBJECTS = \
 "CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o" \
-"CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o" \
-"CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o" \
+"CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o" \
 "CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o" \
-"CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o"
+"CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o" \
+"CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o" \
+"CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o"
 
 # External object files for target Boost_Echo_Client
 Boost_Echo_Client_EXTERNAL_OBJECTS =
 
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/ConnectionHandler.cpp.o
-Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/Database.cpp.o
-Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o
-Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/InputProcessor.cpp.o
+Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o
+Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/StompFrame.cpp.o
+Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/StompClient.cpp.o
+Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/ServerTask.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/build.make
 Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_system.so
 Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
@@ -161,7 +176,7 @@ Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
 Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
 Boost_Echo_Client: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Boost_Echo_Client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yuval/Downloads/SPL-3-Master/Boost_Echo_Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable Boost_Echo_Client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Boost_Echo_Client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

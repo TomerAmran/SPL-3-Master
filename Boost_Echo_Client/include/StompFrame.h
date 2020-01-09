@@ -30,6 +30,7 @@ private:
     std::map<std::string,std::string> headers;
     std::string body;
     std::map<std::string,Command> string_Enum_Convertor;
+    std::map<Command,std::string> enum_string_convertor;
 };
 
 #endif //BOOST_ECHO_CLIENT_STOMPFRAME_H

@@ -7,11 +7,16 @@
 #include "StompFrame.h"
 
 StompFrame::StompFrame(): command(),headers(std::map<std::string,std::string>()),
-                          body(""),string_Enum_Convertor(std::map<std::string,Command>()){
+                          body(""),string_Enum_Convertor(std::map<std::string,Command>())
+                          ,enum_string_convertor(std::map<Command,std::string>()){
     string_Enum_Convertor.insert(std::make_pair("CONNECTED",CONNECTED));
     string_Enum_Convertor.insert(std::make_pair("RECEIPT",RECEIPT));
     string_Enum_Convertor.insert(std::make_pair("MESSAGE",MESSAGE));
     string_Enum_Convertor.insert(std::make_pair("ERROR",ERROR));
+    enum_string_convertor.insert(std::make_pair(CONNECT,"CONNECT"));
+    enum_string_convertor.insert(std::make_pair(SUBSCRIBE,"SUBSCRIBE"));
+    enum_string_convertor.insert(std::make_pair(UNSUBSCIRBE,"UNSUBSCRIBE"));
+    enum_string_convertor.insert(std::make_pair(SEND,"SEND"));
 }
 
 void StompFrame::parse(const std::string msg) {
@@ -34,7 +39,7 @@ void StompFrame::parse(const std::string msg) {
 
 std::string StompFrame::toString() {
     std::string output;
-    output=command+"\n";
+    output=enum_string_convertor[command]+"\n";
     for(auto  p:headers)
     {
         output=output+p.first+":"+p.second+"\n";

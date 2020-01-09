@@ -31,19 +31,22 @@ public abstract class BaseServer<T> implements Server<T> {
 
     @Override
     public void serve() {
-
         try (ServerSocket serverSock = new ServerSocket(port)) {
 			System.out.println("Server started");
 			this.sock = serverSock; //just to be able to close
             while (!Thread.currentThread().isInterrupted()) {
+                //get socket
                 Socket clientSock = serverSock.accept();
+                //manage protocol
                 StompMessagingProtocol<T> protocol = protocolFactory.get();
                 protocol.start(idCounter, connections);
-                idCounter++;
                 BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<>(
                         clientSock,
                         encdecFactory.get(),
                         protocol);
+                //add id&handler to connections
+                connections.AddHandler(idCounter,handler);
+                idCounter++;
                 execute(handler);
             }
         } catch (IOException ex) {
