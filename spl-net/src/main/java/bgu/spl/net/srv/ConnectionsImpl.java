@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ConnectionsImpl<T> implements Connections<T> {
     private ConcurrentHashMap<String, ConcurrentLinkedQueue<Integer>> topic_Subscribtion_Map;
-    private ConcurrentHashMap<Integer ,ConnectionHandler > connectionId_Handler_Map;
+    private ConcurrentHashMap<Integer ,ConnectionHandler<T>> connectionId_Handler_Map;
 
     public ConnectionsImpl()
     {
@@ -26,10 +26,9 @@ public class ConnectionsImpl<T> implements Connections<T> {
     public void send(String channel, T msg) {
       //not going to be used cus personalization of the message should happen in the protocol
         ConcurrentLinkedQueue<Integer> queue = topic_Subscribtion_Map.get(channel);
-        for(int connectionid:queue)
-        {
-            send(connectionid,msg);
-        }
+        for(int connectionId : queue)
+            send(connectionId,msg);
+
 
     }
 
@@ -42,7 +41,7 @@ public class ConnectionsImpl<T> implements Connections<T> {
         connectionId_Handler_Map.remove(connectionId);
 
     }
-    public  void AddHandler(int connectionId,ConnectionHandler handler)
+    public  void AddHandler(int connectionId,ConnectionHandler<T> handler)
     {
         connectionId_Handler_Map.put(connectionId,handler);
     }

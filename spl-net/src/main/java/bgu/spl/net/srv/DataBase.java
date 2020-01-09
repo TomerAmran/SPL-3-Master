@@ -13,8 +13,7 @@ public class DataBase {
     private AtomicInteger messageCounter;
     private  static DataBase instance = new DataBase();
 
-    private DataBase()
-    {
+    private DataBase() {
         topic_Subscribtion_Map =new ConcurrentHashMap<>();
         name_User_Map=new ConcurrentHashMap<>();
         connectionId_User_Map=new ConcurrentHashMap<>();
@@ -49,17 +48,17 @@ public class DataBase {
     {
         name_User_Map.get(username).Login();
     }
-    public void Subscribe(String topic, int subId,int connectionId)
-    {
+    public void Subscribe(String topic, int subId,int connectionId) {
         topic_Subscribtion_Map.putIfAbsent(topic,new ConcurrentHashMap<>());
         topic_Subscribtion_Map.get(topic).putIfAbsent(connectionId_User_Map.get(connectionId),subId);
         connectionId_User_Map.get(connectionId).Addsubscrbtion(subId,topic);
     }
-    public void Unsubscribe (String topic, int subId,int connectionId)
-    {
-        if( topic_Subscribtion_Map.get(topic)!=null) {
-            topic_Subscribtion_Map.get(topic).remove(connectionId_User_Map.get(connectionId));
-        }
+    public void Unsubscribe (int subId,int connectionId) {
+        User user = connectionId_User_Map.get(connectionId);
+        String topic = user.getTopic(subId);
+        if (topic_Subscribtion_Map.get(topic)!=null)
+            topic_Subscribtion_Map.get(topic).remove(user);
+        user.RemoveSubscribtion(subId);
     }
     public void Disconnect(int connectionId)
     {

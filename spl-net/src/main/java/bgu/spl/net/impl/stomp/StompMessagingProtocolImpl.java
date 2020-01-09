@@ -6,11 +6,12 @@ import bgu.spl.net.srv.DataBase;
 
 import java.util.HashMap;
 
-public class StompMessagingProtocolImpl implements StompMessagingProtocol {
+public class StompMessagingProtocolImpl implements StompMessagingProtocol<String> {
     //fields
     private int connectionId;
     private Connections<String> connections;
     private DataBase database;
+    private Boolean shouldTerminate =false;
     /**
      * Used to initiate the current client protocol with it's personal connection ID and the connections implementation
      **/
@@ -22,6 +23,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
     }
     @Override
     public void process(String message){
+        System.out.println("process called");
         StompFrame frame = StompFrame.parse(message);
         switch (frame.getCommand()){
             case CONNECT:
@@ -45,6 +47,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
     private void CONNECT_received(HashMap<String,String> headers){
         //deal with accept-version?
         //deal with host?
+        System.out.println("conecet recived");
         String username = headers.get("login");
         String passcode = headers.get("passcode");
         //new user
@@ -80,7 +83,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
         }
     }
     private void SUBSCRIBE_received(HashMap<String,String> headers, String body) {
-        database.Subscribe(headers.get("destination"), headers.get("id"), connectionId);
+        database.Subscribe(headers.get("destination"), Integer.parseInt(headers.get("id")), connectionId);
         //subscribe in connections
         if ((headers.get("receipt")) != null) {
             StompFrame frame = new StompFrame();
@@ -90,7 +93,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
         }
     }
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body) {
-        database.Subscribe(headers.get("destination"),headers.get("id"),connectionId);
+        database.Unsubscribe(Integer.parseInt(headers.get("id")),connectionId);
         //add subscription to connections
         StompFrame frame = new StompFrame();
         if((headers.get("receipt")) != null) {
@@ -99,7 +102,17 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
             connections.send(connectionId,frame.toString());
         }
     }
-    private void DISCONNECT_received(HashMap<String,String> headers, String body){}
+    private void DISCONNECT_received(HashMap<String,String> headers, String body){
+        database.Disconnect(connectionId);
+        if ((headers.get("receipt")) != null) {
+            StompFrame frame = new StompFrame();
+            frame.setCommand("Recipt");
+            frame.addHeader("receipt-id", headers.get("receipt"));
+            connections.send(connectionId, frame.toString());
+        }
+        shouldTerminate =true;
+
+    }
     private void sendCONNECTED(HashMap<String,String> headers){
         StompFrame frame = new StompFrame();
         frame.setCommand("CONNECTED");
@@ -124,6 +137,6 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol {
      */
     @Override
     public boolean shouldTerminate(){
-        return true;
+        return shouldTerminate;
     }
 }
