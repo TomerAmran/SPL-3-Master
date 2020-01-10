@@ -19,7 +19,7 @@ bool Protocol::processServer(std::string msg) {
     } else if (frame.getCommand() == MESSAGE) {
         message(frame);
     }
-
+    return logout;
 }
 
 std::vector<std::string> Protocol::split_string_to_words_vector(const std::string &string) {
@@ -46,10 +46,10 @@ bool Protocol::reciept(const std::string &id) {
     else if (frame->getCommand() == UNSUBSCIRBE)
         std::cout << "Exited club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == DISCONNECT) {
-        frame = nullptr;
-        Database::getInstance()->removeReciept(id);
         logout=true;
     }
+    frame = nullptr;
+    Database::getInstance()->removeReciept(id);
     return logout;
 }
 
@@ -99,7 +99,7 @@ void Protocol::status(std::string genre) {
     frame.setCommand(SEND);
     frame.addHeader("destination", genre);
     std::string status = Database::getInstance()->getName() + ":";
-    for (const auto &book:books) {
+    for (auto book:books) {
         status += book + ",";
     }
     status.resize(status.size() - 1);

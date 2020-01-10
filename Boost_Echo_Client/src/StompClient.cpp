@@ -15,47 +15,37 @@ int main(int argc, char *argv[]) {
     ConnectionHandler *handler = nullptr;
     InputProcessor processor = InputProcessor();
     while (1) {
-        std::cout << "you are not connected" << std::endl;
         input = "";
         std::getline(std::cin, input);
 
-         if (input.find("login") != std::string::npos) {
-             std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(input);
-             handler=new ConnectionHandler(handlerdata.first, handlerdata.second);
-             if (handler->connect()) {
-                 break;
-             }
-         }
-     }
-        std::string msg;
-        msg = processor.process(input);
-        handler->sendFrameAscii(msg,'\0');
-    std::string answer;
-    // Get back an answer: by using the expected number of bytes (len bytes + newline delimiter)
-    // We could also use: connectionHandler.getline(answer) and then get the answer without the newline char at the end
-    if (!handler->getFrameAscii(answer,'\0')) {
-        std::cout << "Disconnected. Exiting...\n" << std::endl;
+        if (input.find("login") != std::string::npos) {
+            std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(input);
+            handler = new ConnectionHandler(handlerdata.first, handlerdata.second);
+            if (handler->connect()) {
+                break;
+            }
+        }
     }
-        Protocol p=Protocol(*handler);
+    std::string msg;
+    msg = processor.process(input);
+    handler->sendFrameAscii(msg, '\0');
+    ServerTask task(*handler);
+    std::thread t1(task);
+    while (1) {
+        input = "";
+        std::getline(std::cin, input);
+        std::string output = processor.process(input);
+        handler->sendFrameAscii(output,'\0');
+        if (output.find("DISCONNECT") != std::string::npos) {
+            break;
+        }
 
-       /*  ServerTask task(*handler);
-         std::thread t1(&ServerTask::run, &task);
-         while (1) {
-             input = "";
-             std::getline(std::cin, input);
-             std::string output = processor.process(input);
-             if (output.find("Disconnect") != std::string::npos) {
-                 break;
-             }
-             std::string input;
-             ConnectionHandler *handler = nullptr;
-             InputProcessor processor;
-             std::getline(std::cin, input);
-         }
-         t1.join();
-         delete Database::getInstance();
-         delete handler;*/
-        return 0;
     }
+    t1.join();
+    delete Database::getInstance();
+    delete handler;
+
+    return 0;
+}
 
 

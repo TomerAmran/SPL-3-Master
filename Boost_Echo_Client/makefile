@@ -1,5 +1,5 @@
-CFLAGS:=-c -Wall -Weffc++ -g -std=c++11 -Iinclude -pthread
-LDFLAGS:=-lboost_system
+CFLAGS:=-c -Wall -Weffc++ -g -std=c++11  -Iinclude
+LDFLAGS:=-lboost_system -pthread
 
 all: StompBookClubClient
 	g++ -o bin/StompBookClubClient bin/ConnectionHandler.o bin/StompClient.o bin/InputProcessor.o bin/StompFrame.o bin/Database.o bin/ServerTask.o bin/Protocol.o $(LDFLAGS)

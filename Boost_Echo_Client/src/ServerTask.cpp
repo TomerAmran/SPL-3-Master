@@ -7,13 +7,16 @@
 ServerTask::ServerTask(ConnectionHandler &handler):handler(handler),protocol(Protocol(handler)) {
 }
 
-void ServerTask::run() {
+void ServerTask::operator()() {
     std::string msg;
-    handler.getFrameAscii(msg,'\n');
     do
     {
         msg="";
-        handler.getFrameAscii(msg,'\n');
-    }while(!protocol.processServer(msg));
-       handler.close();
+        handler.getFrameAscii(msg,'\0');
+        bool logout=protocol.processServer(msg);
+        if(logout) {
+            break;
+        }
+    }while(1);
+
 }

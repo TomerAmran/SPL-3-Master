@@ -24,7 +24,7 @@ std::string InputProcessor::process(std::string input) {
     } else if (words[0] == "status") {
         output=   status(words);
     } else if (words[0]=="exit"){
-        output=unsubscribe(words);
+        output=logout(words);
     }else if (words[0] == "logout") {
         output=logout(words);
     }
@@ -47,10 +47,10 @@ std::string InputProcessor::subscribe(std::vector<std::string> &words) {
     frame->addHeader("destination",words[1]);
     frame->addHeader("id",std::to_string(subId_counter));
     frame->addHeader("receipt",std::to_string(receipt_counter));
-    subId_counter++;
-    receipt_counter++;
     Database::getInstance()->addGenre(words[1],std::to_string(subId_counter));
     Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+    subId_counter++;
+    receipt_counter++;
     return frame->toString();
 
 }

@@ -6,7 +6,7 @@
 #include <sstream>
 #include "StompFrame.h"
 
-StompFrame::StompFrame(): command(),headers(std::map<std::string,std::string>()),
+StompFrame::StompFrame(): command(NONE),headers(std::map<std::string,std::string>()),
                           body(""),string_Enum_Convertor(std::map<std::string,Command>())
                           ,enum_string_convertor(std::map<Command,std::string>()){
     string_Enum_Convertor.insert(std::make_pair("CONNECTED",CONNECTED));
@@ -17,24 +17,28 @@ StompFrame::StompFrame(): command(),headers(std::map<std::string,std::string>())
     enum_string_convertor.insert(std::make_pair(SUBSCRIBE,"SUBSCRIBE"));
     enum_string_convertor.insert(std::make_pair(UNSUBSCIRBE,"UNSUBSCRIBE"));
     enum_string_convertor.insert(std::make_pair(SEND,"SEND"));
+    enum_string_convertor.insert(std::make_pair(DISCONNECT,"DISCONNECT"));
 }
 
 void StompFrame::parse(const std::string msg) {
-    std::vector<std::string> lines;
-    std::istringstream stream(msg);
-    std::string line;
-    while(std::getline(stream, line)) {
-        lines.push_back(line);
+    if(msg=="")
+        return;
+    else {
+        std::vector<std::string> lines;
+        std::istringstream stream(msg);
+        std::string line;
+        while (std::getline(stream, line)) {
+            lines.push_back(line);
+        }
+        command = string_Enum_Convertor[lines[0]];
+        int i = 1;
+        while ((unsigned) i < lines.size()-1 && lines[i] != "") {
+            int split = lines[i].find(':');
+            headers.insert(std::make_pair(lines[i].substr(0, split), lines[i].substr(split + 1, lines[i].size())));
+            i++;
+        }
+        body = lines[i + 1];
     }
-    command=string_Enum_Convertor[lines[0]];
-    int i=1;
-    while((unsigned )i<lines.size()&&lines[i]!="")
-    {
-        int split=lines[i].find(':');
-        headers.insert(std::make_pair(lines[i].substr(0,split),lines[i].substr(split+1,lines[i].size())));
-        i++;
-    }
-    body=lines[i+1];
 }
 
 std::string StompFrame::toString() {
@@ -46,7 +50,7 @@ std::string StompFrame::toString() {
 
     }
     output=output+""+"\n";
-    output=output+body+"\0";
+    output=output+body;
     return output;
 
 }

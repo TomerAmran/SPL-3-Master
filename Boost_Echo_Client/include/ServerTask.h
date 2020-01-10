@@ -11,7 +11,7 @@
 class ServerTask {
 public:
     ServerTask(ConnectionHandler& handler);
-    void run();
+    void operator()();
 private:
     Protocol protocol;
     ConnectionHandler& handler;
