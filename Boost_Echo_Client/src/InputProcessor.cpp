@@ -24,7 +24,7 @@ std::string InputProcessor::process(std::string input) {
     } else if (words[0] == "status") {
         output=   status(words);
     } else if (words[0]=="exit"){
-        output=logout(words);
+        output=unsubscribe(words);
     }else if (words[0] == "logout") {
         output=logout(words);
     }
@@ -75,7 +75,7 @@ std::string InputProcessor::borrow(std::vector<std::string> &words) {
     StompFrame frame=StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination",words[1]);
-    frame.setBody(Database::getInstance()->getName()+" wish to borrow  "+words[2]);
+    frame.setBody(Database::getInstance()->getName()+" wish to borrow "+words[2]);
     Database::getInstance()->addToBorrowList(words[2]);
     return frame.toString();
 }

@@ -18,8 +18,8 @@ private:
     void connected();
     void error(std::string errormsg);
     bool reciept(const std::string& id);
-    void message(StompFrame& frame);
-    void borrow(std::string msg,const std::string& genre);
+    void message(StompFrame frame);
+    void borrow(std::string msg,const std::string genre);
     void lend(std::string genre,std::string book);
     void status(std::string genre);
     void getBack(std::string genre, std::string book);

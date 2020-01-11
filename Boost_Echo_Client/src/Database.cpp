@@ -32,14 +32,14 @@ void Database:: addBook(std::string genre, std::string book_Name)
     {
         this->addGenre(genre);
     }
-    std::list<std::string> l=genre_Book_Map[genre];
-    l.insert(l.end(),book_Name);
+    genre_Book_Map[genre].push_back(book_Name);
+
 }
 void Database::addBorrowedBook(std::string genre, std::string book_Name, std::string loaner_Name)
 {
-    std::lock_guard<std::mutex> lock(genre_book_lock);
     this->addBook(genre, book_Name);
     book_Loaner_Map.insert(std::make_pair(book_Name,loaner_Name));
+    want_TO_Borrow.remove(book_Name);
 
 }
 void Database::lendBook(std::string genre, std::string book_Name)
@@ -108,8 +108,8 @@ void Database::removeReciept(std::string id) {
     frame= nullptr;
     reciept_Frame_map.erase(id);
 }
-std::list<std::string> & Database::getBooksByGenre(std::string genre) {
-    return genre_Book_Map[genre];
+std::list<std::string>&  Database::getBooksByGenre(std::string genre) {
+     return  genre_Book_Map[genre];
 }
 
 void Database::addGenre(std::string genre) {

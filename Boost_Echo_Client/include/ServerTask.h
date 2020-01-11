@@ -13,8 +13,8 @@ public:
     ServerTask(ConnectionHandler& handler);
     void operator()();
 private:
-    Protocol protocol;
-    ConnectionHandler& handler;
+   ConnectionHandler& handler;
+   Protocol protocol;
 };
 
 #endif //BOOST_ECHO_CLIENT_SERVERTASK_H

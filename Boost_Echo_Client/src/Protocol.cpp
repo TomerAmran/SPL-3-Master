@@ -53,12 +53,12 @@ bool Protocol::reciept(const std::string &id) {
     return logout;
 }
 
-void Protocol::message(StompFrame &frame) {
+void Protocol::message(StompFrame frame) {
     std::vector<std::string> words = split_string_to_words_vector(frame.getBody());
-    if (words[0] == Database::getInstance()->getName()) {
+    if ((words[0] == Database::getInstance()->getName())|(words.size()==1)) {
         std::cout << frame.getHeaders().find("destination")->second << ":" << frame.getBody() << std::endl;
-    } else if (words[2] == "has") {
-        if (Database::getInstance()->wantedToBorrow(words[3])) {
+    } else if (words[1] == "has") {
+        if (Database::getInstance()->wantedToBorrow(words[2])) {
             borrow(frame.getBody(), frame.getHeaders()["destination"]);
         }
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
@@ -79,7 +79,7 @@ void Protocol::message(StompFrame &frame) {
 
 }
 
-void Protocol::borrow(std::string msg, const std::string &genre) {
+void Protocol::borrow(std::string msg, const std::string genre) {
     std::vector<std::string> words = split_string_to_words_vector(msg);
     Database::getInstance()->addBorrowedBook(genre, words[2], words[0]);
     StompFrame frame = StompFrame();
