@@ -44,9 +44,11 @@ public class DataBase {
     {
         return name_User_Map.get(username).isLoggedin();
     }
-    public void Login(String username)
+    public void Login(String username,int connectionid)
     {
         name_User_Map.get(username).Login();
+        name_User_Map.get(username).setConnectionId(connectionid);
+        connectionId_User_Map.put(connectionid,name_User_Map.get(username));
     }
     public void Subscribe(String topic, int subId,int connectionId) {
         topic_Subscribtion_Map.putIfAbsent(topic,new ConcurrentHashMap<>());
@@ -67,6 +69,7 @@ public class DataBase {
         {
             topic_Subscribtion_Map.get(topic).remove(connectionId_User_Map.get(connectionId));
         }
+        connectionId_User_Map.remove(connectionId);
         toDisconnect.Disconnect();
     }
     public String GetUserSubId(String topic, int connectionId)

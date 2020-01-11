@@ -53,16 +53,17 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         //new user
         if(!database.DoesUserExists(username)) {
             database.AddUser(connectionId,username,passcode);
+            database.Login(username,connectionId);
             sendCONNECTED(headers);
         }
         else{//user exist
             if(!database.IsPasswordCorrect(username,passcode))//wrong passcode
                 sendWrongPasswordError();
             else
-                if(!database.IsLoggedIn(username))
+                if(database.IsLoggedIn(username))
                     sendUserAlreadyLoggedInError();
                 else {
-                    database.Login(username);
+                    database.Login(username,connectionId);
                     sendCONNECTED(headers);
                 }
 
@@ -87,7 +88,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         //subscribe in connections
         if ((headers.get("receipt")) != null) {
             StompFrame frame = new StompFrame();
-            frame.setCommand("Recipt");
+            frame.setCommand("RECEIPT");
             frame.addHeader("receipt-id", headers.get("receipt"));
             connections.send(connectionId, frame.toString());
         }
@@ -97,7 +98,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         //add subscription to connections
         StompFrame frame = new StompFrame();
         if((headers.get("receipt")) != null) {
-            frame.setCommand("Recipt");
+            frame.setCommand("RECEIPT");
             frame.addHeader("receipt-id",headers.get("receipt"));
             connections.send(connectionId,frame.toString());
         }
@@ -106,7 +107,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         database.Disconnect(connectionId);
         if ((headers.get("receipt")) != null) {
             StompFrame frame = new StompFrame();
-            frame.setCommand("Recipt");
+            frame.setCommand("RECEIPT");
             frame.addHeader("receipt-id", headers.get("receipt"));
             connections.send(connectionId, frame.toString());
         }
@@ -124,12 +125,14 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         f.setCommand("ERROR");
         f.addHeader("message","Wrong password");
         connections.send(connectionId,f.toString());
+        shouldTerminate =true;
     }
     private void sendUserAlreadyLoggedInError(){
         StompFrame f = new StompFrame();
         f.setCommand("ERROR");
         f.addHeader("message","User already logged in");
         connections.send(connectionId,f.toString());
+        shouldTerminate =true;
     }
 
     /**
