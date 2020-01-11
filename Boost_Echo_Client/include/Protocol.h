@@ -25,7 +25,7 @@ private:
     void getBack(std::string genre, std::string book);
     void contains(std::string genre, std::string book);
     std::string bookFromVector(std::vector<std::string> words,int start,int end);
-
+    std::string getBorrowedBookName(const std::vector<std::string> &words);
 };
 
 #endif //BOOST_ECHO_CLIENT_PROTOCOL_H

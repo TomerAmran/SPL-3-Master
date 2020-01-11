@@ -40,7 +40,6 @@ void Database::addBorrowedBook(std::string genre, std::string book_Name, std::st
     this->addBook(genre, book_Name);
     book_Loaner_Map.insert(std::make_pair(book_Name,loaner_Name));
     want_TO_Borrow.remove(book_Name);
-
 }
 void Database::lendBook(std::string genre, std::string book_Name)
 {

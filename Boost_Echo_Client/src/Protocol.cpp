@@ -59,13 +59,8 @@ void Protocol::message(StompFrame frame) {
     if ((words[0] == Database::getInstance()->getName())|(words.size()==1)) {
         std::cout << frame.getHeaders().find("destination")->second << ":" << frame.getBody() << std::endl;
     } else if (words[1] == "has") {
-        std::string book;
-        if(words[2]=="added") {
-            book = bookFromVector(words, 5, words.size());
-        } else {
-            book = bookFromVector(words, 2, words.size());
-        }
-         if (Database::getInstance()->wantedToBorrow(book)) {
+        std::string book= getBorrowedBookName(words);
+        if (Database::getInstance()->wantedToBorrow(book)) {
             borrow(frame.getBody(), frame.getHeaders()["destination"]);
         }
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
@@ -76,7 +71,7 @@ void Protocol::message(StompFrame frame) {
     } else if ((words[0] == "Taking") & (words[words.size()-1] == Database::getInstance()->getName())) {
         std::string book=bookFromVector(words,1,words.size()-2);
         lend(frame.getHeaders()["destination"], book);
-        std::cout << frame.getBody() << std::endl;
+        std::cout <<frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
     } else if ((words[0] == "Returning") & (words[words.size()-1] == Database::getInstance()->getName())) {
         std::string book=bookFromVector(words,1,words.size()-2);
         getBack(frame.getHeaders()["destination"], book);
@@ -91,12 +86,23 @@ void Protocol::message(StompFrame frame) {
 
 void Protocol::borrow(std::string msg, const std::string genre) {
     std::vector<std::string> words = split_string_to_words_vector(msg);
-    Database::getInstance()->addBorrowedBook(genre, words[2], words[0]);
+    std::string book= getBorrowedBookName(words);
+    Database::getInstance()->addBorrowedBook(genre, book, words[0]);
     StompFrame frame = StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination", genre);
-    frame.setBody("Taking " + words[2] + " from " + words[0]);
+    frame.setBody("Taking " + book + " from " + words[0]);
     handler.sendFrameAscii(frame.toString(), '\0');
+}
+
+std::string Protocol::getBorrowedBookName(const std::vector<std::string> &words) {
+    std::string book;
+    if(words[2]=="added") {
+        book = this->bookFromVector(words, 5, words.size());
+    } else {
+        book = this->bookFromVector(words, 2, words.size());
+    }
+    return book;
 }
 
 void Protocol::lend(std::string genre, std::string book) {
