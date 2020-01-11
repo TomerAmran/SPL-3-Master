@@ -23,7 +23,7 @@ void Database::addGenre(std::string genre,std::string subId)
 {
     std::lock_guard<std::mutex> lock(genre_book_lock);
     genre_Book_Map.insert(std::make_pair(genre,std::list<std::string>()));
-    genre_SubId_map.insert(std::make_pair(subId,genre));
+    genre_SubId_map.insert(std::make_pair(genre,subId));
 }
 void Database:: addBook(std::string genre, std::string book_Name)
 {
@@ -114,6 +114,10 @@ std::list<std::string>&  Database::getBooksByGenre(std::string genre) {
 
 void Database::addGenre(std::string genre) {
     genre_Book_Map.insert(std::make_pair(genre,std::list<std::string>()));
+}
+
+std::string Database::getSubid(std::string genre) {
+    return genre_SubId_map[genre];
 }
 
 

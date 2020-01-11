@@ -24,8 +24,7 @@ private:
     void status(std::string genre);
     void getBack(std::string genre, std::string book);
     void contains(std::string genre, std::string book);
-
-
+    std::string bookFromVector(std::vector<std::string> words,int start,int end);
 
 };
 

@@ -14,6 +14,8 @@ public:
     static std::vector<std::string> split_string_to_words_vector(std::string string);
     static std::pair<std::string,short> get_hostnip(std::string);
 private:
+    int receipt_counter;
+    int subId_counter;
     std::string login(std::vector<std::string>& words);
     std::string subscribe(std::vector<std::string>& words);
     std::string unsubscribe(std::vector<std::string>& words);
@@ -22,8 +24,8 @@ private:
     std::string returnBook(std::vector<std::string>& words);
     std::string status(std::vector<std::string>& words);
     std::string logout(std::vector<std::string>& words);
-    int receipt_counter;
-    int subId_counter;
+    std::string bookFromVector(std::vector<std::string> words,int start,int end);
+
 
 
 };

@@ -29,6 +29,7 @@ public:
     StompFrame* getReciept(std::string id);
     void removeReciept(std::string id);
     std::list<std::string> & getBooksByGenre(std::string genre);
+    std::string getSubid(std::string genre);
 
 
 private:

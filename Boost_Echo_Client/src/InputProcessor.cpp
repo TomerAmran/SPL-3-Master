@@ -57,6 +57,7 @@ std::string InputProcessor::subscribe(std::vector<std::string> &words) {
 std::string InputProcessor::unsubscribe(std::vector<std::string> &words) {
     StompFrame* frame= new StompFrame();
     frame->setCommand(UNSUBSCIRBE);
+    frame->addHeader("id",Database::getInstance()->getSubid(words[1]));
     frame->addHeader("receipt",std::to_string(receipt_counter));
     Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
     return frame->toString();
@@ -65,8 +66,9 @@ std::string InputProcessor::addBook(std::vector<std::string> &words) {
     StompFrame frame=StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination",words[1]);
-    frame.setBody(Database::getInstance()->getName()+" has added the book "+words[2]);
-    Database::getInstance()->addBook(words[1],words[2]);
+    std::string book=bookFromVector(words,2,words.size());
+    frame.setBody(Database::getInstance()->getName()+" has added the book "+book);
+    Database::getInstance()->addBook(words[1],book);
     return  frame.toString();
 
 }
@@ -75,7 +77,8 @@ std::string InputProcessor::borrow(std::vector<std::string> &words) {
     StompFrame frame=StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination",words[1]);
-    frame.setBody(Database::getInstance()->getName()+" wish to borrow "+words[2]);
+    std::string book=bookFromVector(words,2,words.size());
+    frame.setBody(Database::getInstance()->getName()+" wish to borrow "+book);
     Database::getInstance()->addToBorrowList(words[2]);
     return frame.toString();
 }
@@ -84,7 +87,8 @@ std::string InputProcessor::returnBook(std::vector<std::string> &words) {
     StompFrame frame=StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination",words[1]);
-    frame.setBody(+"Returning  "+words[2]+" to "+Database::getInstance()->getLoanerName(words[2]));
+    std::string book=bookFromVector(words,2,words.size());
+    frame.setBody(+"Returning  "+book+" to "+Database::getInstance()->getLoanerName(book));
     Database::getInstance()->deleteBook(words[1],words[2]);
     return frame.toString();
 }
@@ -115,11 +119,18 @@ std::vector<std::string> InputProcessor::split_string_to_words_vector(std::strin
 }
 
 std::pair<std::string, short> InputProcessor::get_hostnip(std::string input) {
-    //to correct;
     int split=input.find(':');
     std::string host=input.substr(6,split-6);
     short port=std::stoi(input.substr(split+1,4));
     return std::make_pair(host,port);
+}
+
+std::string InputProcessor::bookFromVector(std::vector<std::string> words, int start, int end) {
+    std::string book;
+    for(int i=start;i<end;i++)
+        book+=words[i]+" ";
+    book=book.substr(0,book.size()-1);
+    return book;
 }
 
 

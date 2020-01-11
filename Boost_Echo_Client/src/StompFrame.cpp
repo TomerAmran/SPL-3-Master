@@ -37,7 +37,10 @@ void StompFrame::parse(const std::string msg) {
             headers.insert(std::make_pair(lines[i].substr(0, split), lines[i].substr(split + 1, lines[i].size())));
             i++;
         }
-        body = lines[i + 1];
+        if((unsigned)i<lines.size()-1)
+             body = lines[i + 1];
+        else
+            body="";
     }
 }
 
