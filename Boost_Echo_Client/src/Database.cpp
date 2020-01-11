@@ -62,8 +62,8 @@ bool Database::contains(std::string genre, std::string book_Name)
 void Database:: deleteBook(std::string genre, std::string book)
 {
     std::lock_guard<std::mutex> lock(genre_book_lock);
-    std::list<std::string> l=genre_Book_Map[genre];
-    l.remove(book);
+    genre_Book_Map[genre].remove(book);
+
 }
 
 bool Database::wantedToBorrow(std::string book) {

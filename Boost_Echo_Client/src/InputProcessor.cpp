@@ -85,7 +85,6 @@ std::string InputProcessor::returnBook(std::vector<std::string> &words) {
     frame.setCommand(SEND);
     frame.addHeader("destination",words[1]);
     frame.setBody(+"Returning  "+words[2]+" to "+Database::getInstance()->getLoanerName(words[2]));
-    Database::getInstance()->addToBorrowList(words[2]);
     Database::getInstance()->deleteBook(words[1],words[2]);
     return frame.toString();
 }
