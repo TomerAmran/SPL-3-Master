@@ -17,7 +17,6 @@ int main(int argc, char *argv[]) {
     while (1) {
         input = "";
         std::getline(std::cin, input);
-
         if (input.find("login") != std::string::npos) {
             std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(input);
             handler = new ConnectionHandler(handlerdata.first, handlerdata.second);
@@ -35,16 +34,20 @@ int main(int argc, char *argv[]) {
         input = "";
         std::getline(std::cin, input);
         std::string output = processor.process(input);
-        handler->sendFrameAscii(output,'\0');
-        if (output.find("DISCONNECT") != std::string::npos) {
-            break;
+        if ((output.find("CONNECT") != std::string::npos) && (!handler->isConnected())) {
+            if (handler->connect())
+                handler->sendFrameAscii(output, '\0');
+        } else {
+            handler->sendFrameAscii(output, '\0');
+            if (output.find("DISCONNECT") != std::string::npos) {
+                break;
+            }
         }
 
     }
     t1.join();
     delete Database::getInstance();
     delete handler;
-
     return 0;
 }
 

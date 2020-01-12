@@ -79,7 +79,7 @@ std::string InputProcessor::borrow(std::vector<std::string> &words) {
     frame.addHeader("destination",words[1]);
     std::string book=bookFromVector(words,2,words.size());
     frame.setBody(Database::getInstance()->getName()+" wish to borrow "+book);
-    Database::getInstance()->addToBorrowList(words[2]);
+    Database::getInstance()->addToBorrowList(book);
     return frame.toString();
 }
 

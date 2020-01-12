@@ -75,6 +75,7 @@ void Protocol::message(StompFrame frame) {
     } else if ((words[0] == "Returning") & (words[words.size()-1] == Database::getInstance()->getName())) {
         std::string book=bookFromVector(words,1,words.size()-2);
         getBack(frame.getHeaders()["destination"], book);
+        std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
     } else if (words[1] == "status") {
         status(frame.getHeaders()["destination"]);
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
