@@ -7,7 +7,6 @@
 Protocol::Protocol(ConnectionHandler &handler) : handler(handler), loggedOut(false), loggedIn(false) {}
 
 void Protocol::processServer(std::string msg) {
-    std::cout<<msg;
     StompFrame frame = StompFrame();
     frame.parse(msg);
     if (frame.getCommand() == CONNECTED) {
@@ -40,7 +39,7 @@ void Protocol::error(std::string errMsg) {
     loggedIn = false;
 }
 
-bool Protocol::reciept(const std::string &id) {
+void Protocol::reciept(const std::string &id) {
     StompFrame *frame = Database::getInstance()->getReciept(id);
     if (frame->getCommand() == SUBSCRIBE)
         std::cout << "Joind club " << frame->getHeaders()["destination"] << std::endl;

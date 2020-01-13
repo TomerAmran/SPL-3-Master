@@ -19,24 +19,27 @@ int main(int argc, char *argv[]) {
     while (1) {
         userInput = "";
         std::getline(std::cin, userInput);
-        if (userInput.find("login") != std::string::npos) {
+        if (userInput.find("login") == std::string::npos) {
+            std::cout << "Please enter 'login' command";
+        }
+        else {
             std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(userInput);
             handler = new ConnectionHandler(handlerdata.first, handlerdata.second);
             protocol = new Protocol(*handler);
             if (handler->connect()) {
+                //send login request
+                handler -> sendFrameAscii(processor.process(userInput), '\0');\
+                //get server response about login request
                 std::string serverResponse= "";
                 handler -> getFrameAscii(serverResponse, '\0');
                 protocol -> processServer(serverResponse);
                 if(protocol->isLoggedIn()) {
                     //Login Succesful!!!
-                    std::cout << "login succes";
                     break;
                 }
             }
         }
-        else{
-            std::cout << "Please enter 'login' command";
-        }
+
     }
     ServerTask task(*handler, *protocol);
     std::thread MsgReceiverThread(task);

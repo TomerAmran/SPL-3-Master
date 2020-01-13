@@ -21,7 +21,7 @@ private:
     bool loggedIn;
     void connected();
     void error(std::string errMsg);
-    bool reciept(const std::string& id);
+    void reciept(const std::string& id);
     void message(StompFrame frame);
     void borrow(std::string msg,const std::string genre);
     void lend(std::string genre,std::string book);
