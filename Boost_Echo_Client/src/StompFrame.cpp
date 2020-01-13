@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <sstream>
+#include <iostream>
 #include "StompFrame.h"
 
 StompFrame::StompFrame(): command(NONE),headers(std::map<std::string,std::string>()),
@@ -21,8 +22,10 @@ StompFrame::StompFrame(): command(NONE),headers(std::map<std::string,std::string
 }
 
 void StompFrame::parse(const std::string msg) {
-    if(msg=="")
+    if(msg=="") {
+//        std::cout <<"EMPTY MSG";
         return;
+    }
     else {
         std::vector<std::string> lines;
         std::istringstream stream(msg);

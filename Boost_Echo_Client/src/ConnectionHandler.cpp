@@ -9,7 +9,7 @@ using std::endl;
 using std::string;
  
 ConnectionHandler::ConnectionHandler(string host, short port): host_(host), port_(port), io_service_(), socket_(io_service_),connected(
-        false){}
+        false),send_lock(){}
     
 ConnectionHandler::~ConnectionHandler() {
     close();
@@ -97,6 +97,7 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
  
  
 bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
+    std::lock_guard<std::mutex> g(send_lock);
 	bool result=sendBytes(frame.c_str(),frame.length());
 	if(!result) return false;
 	return sendBytes(&delimiter,1);

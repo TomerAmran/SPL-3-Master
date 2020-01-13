@@ -42,11 +42,12 @@ void Protocol::error(std::string errMsg) {
 void Protocol::reciept(const std::string &id) {
     StompFrame *frame = Database::getInstance()->getReciept(id);
     if (frame->getCommand() == SUBSCRIBE)
-        std::cout << "Joind club " << frame->getHeaders()["destination"] << std::endl;
+        std::cout << "Joined club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == UNSUBSCIRBE)
 
         std::cout << "Exited club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == DISCONNECT) {
+        std::cout << "Disconnected";
         loggedIn = false;
     }
     frame = nullptr;

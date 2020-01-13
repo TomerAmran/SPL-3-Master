@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
             protocol = new Protocol(*handler);
             if (handler->connect()) {
                 //send login request
-                handler -> sendFrameAscii(processor.process(userInput), '\0');\
+                handler -> sendFrameAscii(processor.process(userInput), '\0');
                 //get server response about login request
                 std::string serverResponse= "";
                 handler -> getFrameAscii(serverResponse, '\0');
@@ -41,9 +41,9 @@ int main(int argc, char *argv[]) {
         }
 
     }
+
     ServerTask task(*handler, *protocol);
     std::thread MsgReceiverThread(task);
-
     //main loop
     while (1) {
         userInput = "";
@@ -56,6 +56,7 @@ int main(int argc, char *argv[]) {
     MsgReceiverThread.join();
     delete Database::getInstance();
     delete handler;
+    delete protocol;
     return 0;
 }
 
