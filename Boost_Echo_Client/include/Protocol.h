@@ -11,12 +11,16 @@
 class Protocol {
 public:
     Protocol(ConnectionHandler& handler);
-    bool processServer(std::string msg);
+    void processServer(std::string msg);
+    bool isLoggedOut();
+    bool isLoggedIn();
 private:
     ConnectionHandler& handler;
     std::vector<std::string> split_string_to_words_vector(const std::string& string);
+    bool loggedOut;
+    bool loggedIn;
     void connected();
-    void error(std::string errormsg);
+    void error(std::string errMsg);
     bool reciept(const std::string& id);
     void message(StompFrame frame);
     void borrow(std::string msg,const std::string genre);
@@ -26,6 +30,7 @@ private:
     void contains(std::string genre, std::string book);
     std::string bookFromVector(std::vector<std::string> words,int start,int end);
     std::string getBorrowedBookName(const std::vector<std::string> &words);
+
 };
 
 #endif //BOOST_ECHO_CLIENT_PROTOCOL_H

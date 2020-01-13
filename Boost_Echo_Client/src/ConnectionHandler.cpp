@@ -27,6 +27,7 @@ bool ConnectionHandler::connect() {
     }
     catch (std::exception& e) {
         std::cerr << "Connection failed (Error: " << e.what() << ')' << std::endl;
+        //according to the pdf msg should be "Could not connect to server"
         return false;
     }
     connected= true;

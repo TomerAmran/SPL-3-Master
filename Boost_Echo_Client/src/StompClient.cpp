@@ -9,43 +9,48 @@
 #include <ConnectionHandler.h>
 #include <thread>
 #include <ServerTask.h>
+#include "Protocol.h"
 
 int main(int argc, char *argv[]) {
-    std::string input;
+    std::string userInput;
     ConnectionHandler *handler = nullptr;
-    InputProcessor processor = InputProcessor();
+    Protocol *protocol = nullptr;
+    InputProcessor processor = InputProcessor();//why not in the heap?
     while (1) {
-        input = "";
-        std::getline(std::cin, input);
-        if (input.find("login") != std::string::npos) {
-            std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(input);
+        userInput = "";
+        std::getline(std::cin, userInput);
+        if (userInput.find("login") != std::string::npos) {
+            std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(userInput);
             handler = new ConnectionHandler(handlerdata.first, handlerdata.second);
+            protocol = new Protocol(*handler);
             if (handler->connect()) {
-                break;
+                std::string serverResponse= "";
+                handler -> getFrameAscii(serverResponse, '\0');
+                protocol -> processServer(serverResponse);
+                if(protocol->isLoggedIn()) {
+                    //Login Succesful!!!
+                    std::cout << "login succes";
+                    break;
+                }
             }
+        }
+        else{
+            std::cout << "Please enter 'login' command";
         }
     }
-    std::string msg;
-    msg = processor.process(input);
-    handler->sendFrameAscii(msg, '\0');
-    ServerTask task(*handler);
-    std::thread t1(task);
-    while (1) {
-        input = "";
-        std::getline(std::cin, input);
-        std::string output = processor.process(input);
-        if ((output.find("CONNECT") != std::string::npos) && (!handler->isConnected())) {
-            if (handler->connect())
-                handler->sendFrameAscii(output, '\0');
-        } else {
-            handler->sendFrameAscii(output, '\0');
-            if (output.find("DISCONNECT") != std::string::npos) {
-                break;
-            }
-        }
+    ServerTask task(*handler, *protocol);
+    std::thread MsgReceiverThread(task);
 
+    //main loop
+    while (1) {
+        userInput = "";
+        std::getline(std::cin, userInput);
+        std::string toSend = processor.process(userInput);
+        handler->sendFrameAscii(toSend, '\0');
+        if (userInput.find("logout") != std::string::npos)
+                break;
     }
-    t1.join();
+    MsgReceiverThread.join();
     delete Database::getInstance();
     delete handler;
     return 0;

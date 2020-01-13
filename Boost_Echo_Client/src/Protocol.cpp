@@ -4,22 +4,22 @@
 
 #include "Protocol.h"
 
-Protocol::Protocol(ConnectionHandler &handler) : handler(handler) {}
+Protocol::Protocol(ConnectionHandler &handler) : handler(handler), loggedOut(false), loggedIn(false) {}
 
-bool Protocol::processServer(std::string msg) {
+void Protocol::processServer(std::string msg) {
+    std::cout<<msg;
     StompFrame frame = StompFrame();
     frame.parse(msg);
-    bool logout=false;
     if (frame.getCommand() == CONNECTED) {
         connected();
     } else if (frame.getCommand() == ERROR) {
-        error(frame.getBody());
+        error(frame.getHeaders()["message"]);
     } else if (frame.getCommand() == RECEIPT) {
-        logout = reciept(frame.getHeaders()["receipt-id"]);
+        reciept(frame.getHeaders()["receipt-id"]);
     } else if (frame.getCommand() == MESSAGE) {
         message(frame);
     }
-    return logout;
+
 }
 
 std::vector<std::string> Protocol::split_string_to_words_vector(const std::string &string) {
@@ -34,24 +34,23 @@ void Protocol::connected() {
 
 }
 
-void Protocol::error(std::string errormsg) {
-//to-do
+void Protocol::error(std::string errMsg) {
+    std::cout << errMsg;
+    loggedIn = false;
 }
 
 bool Protocol::reciept(const std::string &id) {
     StompFrame *frame = Database::getInstance()->getReciept(id);
-    bool logout = false;
     if (frame->getCommand() == SUBSCRIBE)
         std::cout << "Joind club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == UNSUBSCIRBE)
 
         std::cout << "Exited club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == DISCONNECT) {
-        logout=true;
+        loggedIn = false;
     }
     frame = nullptr;
     Database::getInstance()->removeReciept(id);
-    return logout;
 }
 
 void Protocol::message(StompFrame frame) {
@@ -146,4 +145,7 @@ std::string Protocol::bookFromVector(std::vector<std::string> words, int start, 
     book=book.substr(0,book.size()-1);
     return book;
 }
+
+bool Protocol::isLoggedOut(){return loggedOut;}
+bool Protocol::isLoggedIn(){ return loggedIn;}
 

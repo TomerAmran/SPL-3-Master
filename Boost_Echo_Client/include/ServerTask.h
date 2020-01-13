@@ -10,7 +10,7 @@
 
 class ServerTask {
 public:
-    ServerTask(ConnectionHandler& handler);
+    ServerTask(ConnectionHandler& handler, Protocol& protocol);
     void operator()();
 private:
    ConnectionHandler& handler;

@@ -4,7 +4,7 @@
 
 #include "ServerTask.h"
 
-ServerTask::ServerTask(ConnectionHandler &handler):handler(handler),protocol(Protocol(handler)) {
+ServerTask::ServerTask(ConnectionHandler &handler, Protocol& protocol):handler(handler),protocol(protocol) {
 }
 
 void ServerTask::operator()() {
@@ -13,8 +13,8 @@ void ServerTask::operator()() {
     {
         msg="";
         handler.getFrameAscii(msg,'\0');
-        bool logout=protocol.processServer(msg);
-        if(logout) {
+        protocol.processServer(msg);
+        if(!protocol.isLoggedIn()) {
             break;
         }
     }while(1);
