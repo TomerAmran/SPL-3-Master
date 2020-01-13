@@ -78,10 +78,12 @@ public class DataBase {
     }
     public List<Integer> GetUserSubIdsSubscribedToTopic(String topic)
     {
-        LinkedList<Integer> usernames=new LinkedList<Integer>();
-        for(User user:topic_Subscribtion_Map.get(topic).keySet())
-            usernames.add(user.getConnectionId());
-        return usernames;
+        LinkedList<Integer> usersList = new LinkedList<Integer>();
+        if(topic_Subscribtion_Map.get(topic)!=null) {
+           for (User user : topic_Subscribtion_Map.get(topic).keySet())
+                usersList.add(user.getConnectionId());
+        }
+        return usersList;
     }
 
 

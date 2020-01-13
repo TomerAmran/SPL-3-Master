@@ -19,7 +19,7 @@ public class EchoClient {
         }
 
         //BufferedReader and BufferedWriter automatically using UTF-8 encoding
-        try (Socket sock = new Socket(args[0], 3000);
+        try (Socket sock = new Socket(args[0], 7777);
              BufferedInputStream in = new BufferedInputStream(sock.getInputStream());
              BufferedOutputStream out = new BufferedOutputStream(sock.getOutputStream());) {
             System.out.println("socketIsNull = " +(sock==null));
@@ -41,7 +41,13 @@ public class EchoClient {
                     System.out.println(msg);
                 }
             }
-
+            out.write(endc.encode("Send\n" +
+                    "destination:a"+"\n"+
+                    "\n"+
+                    "Book status"
+                    +
+                    "^@"));
+            out.flush();
             System.out.println("awaiting response");
 
 

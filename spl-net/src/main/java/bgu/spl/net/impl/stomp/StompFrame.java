@@ -2,17 +2,18 @@ package bgu.spl.net.impl.stomp;
 
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class StompFrame {
     //fields
     public static enum Command {CONNECT, CONNECTED, MESSAGE, RECEIPT, ERROR, SEND, SUBSCRIBE, UNSUBSCRIBE, DISCONNECT}
     private Command command;
-    private HashMap<String,String> headers;
+    private LinkedHashMap<String,String> headers;
     private String body;
 
     public StompFrame(){
-        headers = new HashMap<>();
+        headers = new LinkedHashMap<>();
         body = "";
     }
 
@@ -52,7 +53,7 @@ public class StompFrame {
             output = output + headerName+":"+headerValue+"\n";
         }
         //Body & endOfMesseage charcter
-        output = output + "\n" + body + '\u0000';
+        output = output + "\n" + body;
         return output;
         }
 

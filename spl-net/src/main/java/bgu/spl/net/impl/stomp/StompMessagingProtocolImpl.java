@@ -23,7 +23,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
     }
     @Override
     public void process(String message){
-        System.out.println("process called");
+        System.out.println(message);
         StompFrame frame = StompFrame.parse(message);
         switch (frame.getCommand()){
             case CONNECT:
@@ -42,7 +42,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
                 DISCONNECT_received(frame.getHeaders(), frame.getBody());
                 break;
         }
-
+        checkAndSendRecipe(frame.getHeaders());
     }
     private void CONNECT_received(HashMap<String,String> headers){
         //deal with accept-version?
@@ -79,6 +79,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
             message.addHeader("Message-id",(database.getAndIncreaseMessageCounter().toString()));
             message.addHeader("destination",headers.get("destination"));
             message.setBody(body);
+
             connections.send(connectionId,message.toString());
 
         }
@@ -86,31 +87,17 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
     private void SUBSCRIBE_received(HashMap<String,String> headers, String body) {
         database.Subscribe(headers.get("destination"), Integer.parseInt(headers.get("id")), connectionId);
         //subscribe in connections
-        if ((headers.get("receipt")) != null) {
-            StompFrame frame = new StompFrame();
-            frame.setCommand("RECEIPT");
-            frame.addHeader("receipt-id", headers.get("receipt"));
-            connections.send(connectionId, frame.toString());
-        }
+
     }
+
+
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body) {
         database.Unsubscribe(Integer.parseInt(headers.get("id")),connectionId);
         //add subscription to connections
         StompFrame frame = new StompFrame();
-        if((headers.get("receipt")) != null) {
-            frame.setCommand("RECEIPT");
-            frame.addHeader("receipt-id",headers.get("receipt"));
-            connections.send(connectionId,frame.toString());
-        }
     }
     private void DISCONNECT_received(HashMap<String,String> headers, String body){
         database.Disconnect(connectionId);
-        if ((headers.get("receipt")) != null) {
-            StompFrame frame = new StompFrame();
-            frame.setCommand("RECEIPT");
-            frame.addHeader("receipt-id", headers.get("receipt"));
-            connections.send(connectionId, frame.toString());
-        }
         shouldTerminate =true;
 
     }
@@ -133,6 +120,15 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         f.addHeader("message","User already logged in");
         connections.send(connectionId,f.toString());
         shouldTerminate =true;
+    }
+
+    private void checkAndSendRecipe(HashMap<String, String> headers) {
+        if ((headers.get("receipt")) != null) {
+            StompFrame frame = new StompFrame();
+            frame.setCommand("RECEIPT");
+            frame.addHeader("receipt-id", headers.get("receipt"));
+            connections.send(connectionId, frame.toString());
+        }
     }
 
     /**
