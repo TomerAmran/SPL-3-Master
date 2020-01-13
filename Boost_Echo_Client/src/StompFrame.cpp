@@ -35,7 +35,7 @@ void StompFrame::parse(const std::string msg) {
         }
         command = string_Enum_Convertor[lines[0]];
         int i = 1;
-        while ((unsigned) i < lines.size()-1 && lines[i] != "") {
+        while ((unsigned) i < lines.size() && lines[i] != "") {
             int split = lines[i].find(':');
             headers.insert(std::make_pair(lines[i].substr(0, split), lines[i].substr(split + 1, lines[i].size())));
             i++;

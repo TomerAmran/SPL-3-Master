@@ -35,6 +35,7 @@ std::string InputProcessor::login(std::vector<std::string> &words) {
     StompFrame frame=StompFrame();
     frame.setCommand(CONNECT);
     frame.addHeader("accept-version","1.2");
+    frame.addHeader("host","stomp.cs.bgu.ac.il");
     frame.addHeader("login",words[2]);
     frame.addHeader("passcode",words[3]);
     Database::getInstance()->setName(words[2]);

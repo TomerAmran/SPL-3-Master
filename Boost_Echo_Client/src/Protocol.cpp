@@ -44,7 +44,6 @@ void Protocol::reciept(const std::string &id) {
     if (frame->getCommand() == SUBSCRIBE)
         std::cout << "Joined club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == UNSUBSCIRBE)
-
         std::cout << "Exited club " << frame->getHeaders()["destination"] << std::endl;
     else if (frame->getCommand() == DISCONNECT) {
         std::cout << "Disconnected";

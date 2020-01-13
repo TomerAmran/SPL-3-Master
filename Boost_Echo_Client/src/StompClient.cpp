@@ -13,7 +13,7 @@
 
 int main(int argc, char *argv[]) {
     std::string userInput;
-    ConnectionHandler *handler = nullptr;
+    ConnectionHandler *handler= nullptr;
     Protocol *protocol = nullptr;
     InputProcessor processor = InputProcessor();//why not in the heap?
     while (1) {
