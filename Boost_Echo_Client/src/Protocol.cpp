@@ -30,6 +30,7 @@ std::vector<std::string> Protocol::split_string_to_words_vector(const std::strin
 }
 
 void Protocol::connected() {
+    loggedIn = true;
     std::cout << "Login successful" << std::endl;
 
 }
