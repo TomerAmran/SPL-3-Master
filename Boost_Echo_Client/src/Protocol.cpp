@@ -41,10 +41,15 @@ void Protocol::error(std::string errMsg) {
 
 void Protocol::reciept(const std::string &id) {
     StompFrame *frame = Database::getInstance()->getReciept(id);
-    if (frame->getCommand() == SUBSCRIBE)
+    if (frame->getCommand() == SUBSCRIBE) {
+        Database::getInstance()->addGenre(frame->getHeaders()["destination"], frame->getHeaders()["id"]);
         std::cout << "Joined club " << frame->getHeaders()["destination"] << std::endl;
-    else if (frame->getCommand() == UNSUBSCIRBE)
-        std::cout << "Exited club " << frame->getHeaders()["destination"] << std::endl;
+    }
+    else if (frame->getCommand() == UNSUBSCIRBE) {
+        std::string genre=Database::getInstance()->getGenreById(frame->getHeaders()["id"]);
+        Database::getInstance()->unsubscribe(genre);
+        std::cout << "Exited club " <<genre << std::endl;
+    }
     else if (frame->getCommand() == DISCONNECT) {
         std::cout << "Disconnected";
         loggedIn = false;

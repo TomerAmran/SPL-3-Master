@@ -18,11 +18,13 @@ Database::Database() : genre_Book_Map(std::unordered_map<std::string, std::list<
                        genre_SubId_map(std::unordered_map<std::string, std::string>()),
                        want_TO_Borrow(std::list<std::string>()), name(""),
                        reciept_Frame_map(std::unordered_map<std::string, StompFrame *>()),
-                       genre_book_lock(), want_to_borrow_lock(), reciept_frame_lock(), cv() {}
+                       genre_book_lock(), want_to_borrow_lock(), reciept_frame_lock(),
+                       genre_subid_lock(),cv() {}
 
 void Database::addGenre(std::string genre, std::string subId) {
-    std::lock_guard<std::mutex> lock(genre_book_lock);
+    std::lock_guard<std::mutex> lock1(genre_book_lock);
     genre_Book_Map.insert(std::make_pair(genre, std::list<std::string>()));
+    std::lock_guard<std::mutex> lock2(genre_subid_lock);
     genre_SubId_map.insert(std::make_pair(genre, subId));
 }
 
@@ -129,6 +131,7 @@ Database::~Database() {
 
 std::list<std::string> Database::getGenreList() {
     std::list<std::string> genrelist;
+    std::lock_guard<std::mutex> lock(genre_subid_lock);
     for(auto p:genre_SubId_map)
         genrelist.push_back(p.first);
     return genrelist;
@@ -141,6 +144,20 @@ bool Database::canLogOut() {
         cv.wait(lock);
     }
     return true;
+}
+
+std::string Database::getGenreById(std::string subid) {
+    std::lock_guard<std::mutex> lock2(genre_subid_lock);
+    for(auto pair:genre_SubId_map) {
+        if (pair.second==subid)
+            return pair.first;
+    }
+    return "";
+}
+
+void Database::unsubscribe(std::string genre) {
+    std::lock_guard<std::mutex> lock2(genre_subid_lock);
+    genre_SubId_map.erase(genre);
 }
 
 

@@ -51,7 +51,7 @@ void InputProcessor::subscribe(std::vector<std::string> &words) {
     frame->addHeader("destination", words[1]);
     frame->addHeader("id", std::to_string(subId_counter));
     frame->addHeader("receipt", std::to_string(receipt_counter));
-    Database::getInstance()->addGenre(words[1], std::to_string(subId_counter));
+
     Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
     subId_counter++;
     receipt_counter++;
@@ -65,6 +65,7 @@ void InputProcessor::unsubscribe(std::vector<std::string> &words) {
     frame->addHeader("id", Database::getInstance()->getSubid(words[1]));
     frame->addHeader("receipt", std::to_string(receipt_counter));
     Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
+    receipt_counter++;
     conHndlr.sendFrameAscii(frame->toString(),'\0');
 }
 // creating the send frame to be sent and saving book
@@ -110,12 +111,12 @@ void InputProcessor::status(std::vector<std::string> &words) {
 //creating the disconnect frame to be sent, saving the recipt
 void InputProcessor::logout(std::vector<std::string> &words) {
     logoutUnsubscribe();
-    if(Database::getInstance()->canLogOut()){}
+  //  Database::getInstance()->canLogOut();//graceful shoutdown impl
     StompFrame *frame = new StompFrame();
     frame->setCommand(DISCONNECT);
     frame->addHeader("receipt", std::to_string(receipt_counter));
     Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
-    conHndlr.sendFrameAscii(frame.toString(),'\0');
+    conHndlr.sendFrameAscii(frame->toString(),'\0');
 
 };
 //spliting lines to vector of words
@@ -145,9 +146,10 @@ void InputProcessor::logoutUnsubscribe() {
         for(auto genre:Database::getInstance()->getGenreList())
         {
             std::vector<std::string> words=std::vector<std::string>();
-           words.push_back("");
+           words.push_back("exit");
            words.push_back(genre);
-            unsubscribe(words);
+           unsubscribe(words);
+
         }
 }
 
