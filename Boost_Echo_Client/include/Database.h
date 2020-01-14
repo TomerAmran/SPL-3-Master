@@ -13,6 +13,11 @@
 class Database {
 
 public:
+    Database(Database const &)= delete;
+    ~Database();
+    Database& operator=(const Database& database)= delete;
+    Database& operator=(const Database&& database)= delete;
+    Database(Database&& database)= delete;
     static Database* getInstance();
     void addGenre(std::string genre, std::string subId);
     void addBook(std::string genre, std::string book_Name);
