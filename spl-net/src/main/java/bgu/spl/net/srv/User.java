@@ -52,7 +52,7 @@ public class User {
     public String getTopic(int subId){return subId_Topic_Map.get(subId);}
 
     public void Disconnect() {
-        subId_Topic_Map.clear();
+//        subId_Topic_Map.clear();
         loggedin = false;
     }
 }

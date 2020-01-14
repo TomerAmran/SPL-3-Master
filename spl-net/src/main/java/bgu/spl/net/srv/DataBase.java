@@ -65,10 +65,10 @@ public class DataBase {
     public void Disconnect(int connectionId)
     {
         User toDisconnect=connectionId_User_Map.get(connectionId);
-        for(String topic :topic_Subscribtion_Map.keySet())
-        {
-            topic_Subscribtion_Map.get(topic).remove(connectionId_User_Map.get(connectionId));
-        }
+//      for(String topic :topic_Subscribtion_Map.keySet())
+//        {
+//            topic_Subscribtion_Map.get(topic).remove(connectionId_User_Map.get(connectionId));
+//        }
         connectionId_User_Map.remove(connectionId);
         toDisconnect.Disconnect();
     }
