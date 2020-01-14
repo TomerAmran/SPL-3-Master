@@ -8,33 +8,33 @@
 #include <Database.h>
 #include "InputProcessor.h"
 
-InputProcessor::InputProcessor() : receipt_counter(1), subId_counter(1) {}
+InputProcessor::InputProcessor(ConnectionHandler& connectionHandler) : conHndlr(connectionHandler), receipt_counter(1), subId_counter(1) {}
 
 //parsin the user input and reacting accordingly
-std::string InputProcessor::process(std::string input) {
+void InputProcessor::processAndSend(std::string input) {
     std::vector<std::string> words = split_string_to_words_vector(input);
     std::string output;
     if (words[0] == "login") {
-        output = login(words);
+        login(words);
     } else if (words[0] == "join") {
-        output = subscribe(words);
+        subscribe(words);
     } else if (words[0] == "add") {
-        output = addBook(words);
+        addBook(words);
     } else if (words[0] == "borrow") {
-        output = borrow(words);
+        borrow(words);
     } else if (words[0] == "return") {
-        output = returnBook(words);
+        returnBook(words);
     } else if (words[0] == "status") {
-        output = status(words);
+        status(words);
     } else if (words[0] == "exit") {
-        output = unsubscribe(words);
+        unsubscribe(words);
     } else if (words[0] == "logout") {
-        output = logout(words);
+        logout(words);
     }
-    return output;
+
 }
 //creating the login frame be sent and setting the user name
-std::string InputProcessor::login(std::vector<std::string> &words) {
+void InputProcessor::login(std::vector<std::string> &words) {
     StompFrame frame = StompFrame();
     frame.setCommand(CONNECT);
     frame.addHeader("accept-version", "1.2");
@@ -42,10 +42,10 @@ std::string InputProcessor::login(std::vector<std::string> &words) {
     frame.addHeader("login", words[2]);
     frame.addHeader("passcode", words[3]);
     Database::getInstance()->setName(words[2]);
-    return frame.toString();
+    conHndlr.sendFrameAscii(frame.toString(),'\0');
 }
 //creating the subscribe frame to be sent, saving the recipt and subid
-std::string InputProcessor::subscribe(std::vector<std::string> &words) {
+void InputProcessor::subscribe(std::vector<std::string> &words) {
     StompFrame *frame = new StompFrame();
     frame->setCommand(SUBSCRIBE);
     frame->addHeader("destination", words[1]);
@@ -55,67 +55,67 @@ std::string InputProcessor::subscribe(std::vector<std::string> &words) {
     Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
     subId_counter++;
     receipt_counter++;
-    return frame->toString();
+    conHndlr.sendFrameAscii(frame->toString(),'\0');
 
 }
 //creating the unsubscribe frame to be sent and saving the reciept
-std::string InputProcessor::unsubscribe(std::vector<std::string> &words) {
+void InputProcessor::unsubscribe(std::vector<std::string> &words) {
     StompFrame *frame = new StompFrame();
     frame->setCommand(UNSUBSCIRBE);
     frame->addHeader("id", Database::getInstance()->getSubid(words[1]));
     frame->addHeader("receipt", std::to_string(receipt_counter));
     Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
-    return frame->toString();
+    conHndlr.sendFrameAscii(frame->toString(),'\0');
 }
 // creating the send frame to be sent and saving book
-std::string InputProcessor::addBook(std::vector<std::string> &words) {
+void InputProcessor::addBook(std::vector<std::string> &words) {
     StompFrame frame = StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination", words[1]);
     std::string book = bookFromVector(words, 2, words.size());
     frame.setBody(Database::getInstance()->getName() + " has added the book " + book);
     Database::getInstance()->addBook(words[1], book);
-    return frame.toString();
+    conHndlr.sendFrameAscii(frame.toString(),'\0');
 
 }
 // creating the send frame to be sent and adding the book to the borrow list
-std::string InputProcessor::borrow(std::vector<std::string> &words) {
+void InputProcessor::borrow(std::vector<std::string> &words) {
     StompFrame frame = StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination", words[1]);
     std::string book = bookFromVector(words, 2, words.size());
     frame.setBody(Database::getInstance()->getName() + " wish to borrow " + book);
     Database::getInstance()->addToBorrowList(book);
-    return frame.toString();
+    conHndlr.sendFrameAscii(frame.toString(),'\0');
 }
 // creating the send frame to be sent and removing the book from inventory
-std::string InputProcessor::returnBook(std::vector<std::string> &words) {
+void InputProcessor::returnBook(std::vector<std::string> &words) {
     StompFrame frame = StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination", words[1]);
     std::string book = bookFromVector(words, 2, words.size());
     frame.setBody(+"Returning  " + book + " to " + Database::getInstance()->getLoanerName(book));
     Database::getInstance()->deleteBook(words[1], words[2]);
-    return frame.toString();
+    conHndlr.sendFrameAscii(frame.toString(),'\0');
 }
 // creating the send frame to be sent
-std::string InputProcessor::status(std::vector<std::string> &words) {
+void InputProcessor::status(std::vector<std::string> &words) {
     StompFrame frame = StompFrame();
     frame.setCommand(SEND);
     frame.addHeader("destination", words[1]);
     frame.setBody("book status");
-    return frame.toString();
+    conHndlr.sendFrameAscii(frame.toString(),'\0');
 
 }
 //creating the disconnect frame to be sent, saving the recipt
-std::string InputProcessor::logout(std::vector<std::string> &words) {
+void InputProcessor::logout(std::vector<std::string> &words) {
     logoutUnsubscribe();
     if(Database::getInstance()->canLogOut()){}
     StompFrame *frame = new StompFrame();
     frame->setCommand(DISCONNECT);
     frame->addHeader("receipt", std::to_string(receipt_counter));
     Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
-    return frame->toString();
+    conHndlr.sendFrameAscii(frame.toString(),'\0');
 
 };
 //spliting lines to vector of words

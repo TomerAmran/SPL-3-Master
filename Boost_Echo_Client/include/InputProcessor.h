@@ -7,25 +7,29 @@
 
 #include <vector>
 #include <string>
+#include "ConnectionHandler.h"
+
 class InputProcessor {
 public:
-    InputProcessor();
-    std::string process(std::string input);
+    InputProcessor(ConnectionHandler& connectionHandler);
+    void processAndSend(std::string input);
     static std::vector<std::string> split_string_to_words_vector(std::string string);
     static std::pair<std::string,short> get_hostnip(std::string);
 private:
+    class ConnectionHandler& conHndlr;
     int receipt_counter;
     int subId_counter;
-    std::string login(std::vector<std::string>& words);
-    std::string subscribe(std::vector<std::string>& words);
-    std::string unsubscribe(std::vector<std::string>& words);
-    std::string addBook(std::vector<std::string>& words);
-    std::string borrow(std::vector<std::string>& words);
-    std::string returnBook(std::vector<std::string>& words);
-    std::string status(std::vector<std::string>& words);
-    std::string logout(std::vector<std::string>& words);
+    void login(std::vector<std::string>& words);
+    void subscribe(std::vector<std::string>& words);
+    void unsubscribe(std::vector<std::string>& words);
+    void addBook(std::vector<std::string>& words);
+    void borrow(std::vector<std::string>& words);
+    void returnBook(std::vector<std::string>& words);
+    void status(std::vector<std::string>& words);
+    void logout(std::vector<std::string>& words);
     void logoutUnsubscribe();
     std::string bookFromVector(std::vector<std::string> words,int start,int end);
+
 
 
 

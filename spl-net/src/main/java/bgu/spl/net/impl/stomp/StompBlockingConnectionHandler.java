@@ -29,7 +29,7 @@ public class StompBlockingConnectionHandler  implements Runnable, ConnectionHand
             while (!protocol.shouldTerminate() && connected && (read = in.read()) >= 0) {
                 String nextMessage = encdec.decodeNextByte((byte) read);
                 if(nextMessage != null)
-                    protocol.process(nextMessage);
+                    protocol.processAndSend(nextMessage);
             }
         }
         catch (IOException ex){ex.printStackTrace();}

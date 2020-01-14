@@ -22,7 +22,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         database = DataBase.getInstance();
     }
     @Override
-    public void process(String message){
+    public void processAndSend(String message){
         System.out.println(message);
         StompFrame frame = StompFrame.parse(message);
         switch (frame.getCommand()){

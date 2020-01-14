@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     std::string userInput;
     ConnectionHandler *handler= nullptr;
     Protocol *protocol = nullptr;
-    InputProcessor processor = InputProcessor();
+    InputProcessor* processor = nullptr;
     while (1) {
         userInput = "";
         std::getline(std::cin, userInput);
@@ -28,7 +28,8 @@ int main(int argc, char *argv[]) {
             protocol = new Protocol(*handler);
             if (handler->connect()) {
                 //send login request
-                handler -> sendFrameAscii(processor.process(userInput), '\0');
+                processor = new InputProcessor(*handler);
+                processor->processAndSend(userInput);
                 //get server response about login request
                 std::string serverResponse= "";
                 handler -> getFrameAscii(serverResponse, '\0');
@@ -49,12 +50,12 @@ int main(int argc, char *argv[]) {
 
     ServerTask task(*handler, *protocol);
     std::thread MsgReceiverThread(task);
+
     //main loop
     while (1) {
         userInput = "";
         std::getline(std::cin, userInput);
-        std::string toSend = processor.process(userInput);
-        handler->sendFrameAscii(toSend, '\0');
+        processor -> processAndSend(userInput);
         if (userInput.find("logout") != std::string::npos)
                 break;
     }
@@ -62,6 +63,7 @@ int main(int argc, char *argv[]) {
     delete Database::getInstance();
     delete handler;
     delete protocol;
+    delete processor;
     return 0;
 }
 

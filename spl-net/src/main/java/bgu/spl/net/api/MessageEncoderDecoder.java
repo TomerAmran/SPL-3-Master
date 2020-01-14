@@ -3,7 +3,7 @@ package bgu.spl.net.api;
 public interface MessageEncoderDecoder<T> {
 
     /**
-     * add the next byte to the decoding process
+     * add the next byte to the decoding processAndSend
      *
      * @param nextByte the next byte to consider for the currently decoded
      * message

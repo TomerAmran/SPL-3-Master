@@ -8,7 +8,7 @@ public class EchoProtocol implements MessagingProtocol<String> {
     private boolean shouldTerminate = false;
 
     @Override
-    public String process(String msg) {
+    public String processAndSend(String msg) {
         shouldTerminate = "bye".equals(msg);
         System.out.println("[" + LocalDateTime.now() + "]: " + msg);
         return createEcho(msg);
