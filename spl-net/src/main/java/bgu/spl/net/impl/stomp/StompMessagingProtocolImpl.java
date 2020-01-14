@@ -42,7 +42,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
                 DISCONNECT_received(frame.getHeaders(), frame.getBody());
                 break;
         }
-        checkAndSendRecipe(frame.getHeaders());
+
     }
     private void CONNECT_received(HashMap<String,String> headers){
         //deal with accept-version?
@@ -55,6 +55,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
             database.AddUser(connectionId,username,passcode);
             database.Login(username,connectionId);
             sendCONNECTED(headers);
+
         }
         else{//user exist
             if(!database.IsPasswordCorrect(username,passcode))//wrong passcode
@@ -86,18 +87,18 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
     }
     private void SUBSCRIBE_received(HashMap<String,String> headers, String body) {
         database.Subscribe(headers.get("destination"), Integer.parseInt(headers.get("id")), connectionId);
-        //subscribe in connections
-
+        checkAndSendRecipe(headers);
     }
 
 
     private void UNSUBSCRIBE_received(HashMap<String,String> headers, String body) {
         database.Unsubscribe(Integer.parseInt(headers.get("id")),connectionId);
-        //add subscription to connections
-        StompFrame frame = new StompFrame();
+        checkAndSendRecipe(headers);
+
     }
     private void DISCONNECT_received(HashMap<String,String> headers, String body){
         database.Disconnect(connectionId);
+        checkAndSendRecipe(headers);
         shouldTerminate =true;
 
     }
@@ -106,6 +107,7 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
         frame.setCommand("CONNECTED");
         frame.addHeader("version",headers.get("accept-version"));
         connections.send(connectionId, frame.toString());
+        checkAndSendRecipe(headers);
     }
     private void sendWrongPasswordError(){
         StompFrame f = new StompFrame();

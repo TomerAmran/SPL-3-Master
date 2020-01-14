@@ -88,10 +88,13 @@ public class Reactor<T> implements Server<T> {
         if (Thread.currentThread() == selectorThread) {
             key.interestOps(ops);
         } else {
-            selectorTasks.add(() -> {
-                key.interestOps(ops);
-            });
-            selector.wakeup();
+
+                selectorTasks.add(() -> {
+                    if(key.isValid())
+                        key.interestOps(ops);
+                });
+                selector.wakeup();
+
         }
     }
 
