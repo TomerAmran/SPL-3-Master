@@ -1,137 +1,153 @@
 //
 // Created by yuval on 08/01/2020.
-//
+//class for processin the user input
 
 #include <iterator>
 #include <sstream>
 #include <StompFrame.h>
 #include <Database.h>
 #include "InputProcessor.h"
-InputProcessor::InputProcessor():receipt_counter(1),subId_counter(1){}
+
+InputProcessor::InputProcessor() : receipt_counter(1), subId_counter(1) {}
+
+//parsin the user input and reacting accordingly
 std::string InputProcessor::process(std::string input) {
     std::vector<std::string> words = split_string_to_words_vector(input);
     std::string output;
     if (words[0] == "login") {
-       output= login(words);
+        output = login(words);
     } else if (words[0] == "join") {
-        output= subscribe(words);
+        output = subscribe(words);
     } else if (words[0] == "add") {
-        output=  addBook(words);
+        output = addBook(words);
     } else if (words[0] == "borrow") {
-        output= borrow(words);
+        output = borrow(words);
     } else if (words[0] == "return") {
-        output=    returnBook(words);
+        output = returnBook(words);
     } else if (words[0] == "status") {
-        output=   status(words);
-    } else if (words[0]=="exit"){
-        output=unsubscribe(words);
-    }else if (words[0] == "logout") {
-        output=logout(words);
+        output = status(words);
+    } else if (words[0] == "exit") {
+        output = unsubscribe(words);
+    } else if (words[0] == "logout") {
+        output = logout(words);
     }
     return output;
 }
-
+//creating the login frame be sent and setting the user name
 std::string InputProcessor::login(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
+    StompFrame frame = StompFrame();
     frame.setCommand(CONNECT);
-    frame.addHeader("accept-version","1.2");
-    frame.addHeader("host","stomp.cs.bgu.ac.il");
-    frame.addHeader("login",words[2]);
-    frame.addHeader("passcode",words[3]);
+    frame.addHeader("accept-version", "1.2");
+    frame.addHeader("host", "stomp.cs.bgu.ac.il");
+    frame.addHeader("login", words[2]);
+    frame.addHeader("passcode", words[3]);
     Database::getInstance()->setName(words[2]);
     return frame.toString();
 }
-
+//creating the subscribe frame to be sent, saving the recipt and subid
 std::string InputProcessor::subscribe(std::vector<std::string> &words) {
-    StompFrame* frame= new StompFrame();
+    StompFrame *frame = new StompFrame();
     frame->setCommand(SUBSCRIBE);
-    frame->addHeader("destination",words[1]);
-    frame->addHeader("id",std::to_string(subId_counter));
-    frame->addHeader("receipt",std::to_string(receipt_counter));
-    Database::getInstance()->addGenre(words[1],std::to_string(subId_counter));
-    Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+    frame->addHeader("destination", words[1]);
+    frame->addHeader("id", std::to_string(subId_counter));
+    frame->addHeader("receipt", std::to_string(receipt_counter));
+    Database::getInstance()->addGenre(words[1], std::to_string(subId_counter));
+    Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
     subId_counter++;
     receipt_counter++;
     return frame->toString();
 
 }
+//creating the unsubscribe frame to be sent and saving the reciept
 std::string InputProcessor::unsubscribe(std::vector<std::string> &words) {
-    StompFrame* frame= new StompFrame();
+    StompFrame *frame = new StompFrame();
     frame->setCommand(UNSUBSCIRBE);
-    frame->addHeader("id",Database::getInstance()->getSubid(words[1]));
-    frame->addHeader("receipt",std::to_string(receipt_counter));
-    Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+    frame->addHeader("id", Database::getInstance()->getSubid(words[1]));
+    frame->addHeader("receipt", std::to_string(receipt_counter));
+    Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
     return frame->toString();
 }
+// creating the send frame to be sent and saving book
 std::string InputProcessor::addBook(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
+    StompFrame frame = StompFrame();
     frame.setCommand(SEND);
-    frame.addHeader("destination",words[1]);
-    std::string book=bookFromVector(words,2,words.size());
-    frame.setBody(Database::getInstance()->getName()+" has added the book "+book);
-    Database::getInstance()->addBook(words[1],book);
-    return  frame.toString();
+    frame.addHeader("destination", words[1]);
+    std::string book = bookFromVector(words, 2, words.size());
+    frame.setBody(Database::getInstance()->getName() + " has added the book " + book);
+    Database::getInstance()->addBook(words[1], book);
+    return frame.toString();
 
 }
-
+// creating the send frame to be sent and adding the book to the borrow list
 std::string InputProcessor::borrow(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
+    StompFrame frame = StompFrame();
     frame.setCommand(SEND);
-    frame.addHeader("destination",words[1]);
-    std::string book=bookFromVector(words,2,words.size());
-    frame.setBody(Database::getInstance()->getName()+" wish to borrow "+book);
+    frame.addHeader("destination", words[1]);
+    std::string book = bookFromVector(words, 2, words.size());
+    frame.setBody(Database::getInstance()->getName() + " wish to borrow " + book);
     Database::getInstance()->addToBorrowList(book);
     return frame.toString();
 }
-
+// creating the send frame to be sent and removing the book from inventory
 std::string InputProcessor::returnBook(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
+    StompFrame frame = StompFrame();
     frame.setCommand(SEND);
-    frame.addHeader("destination",words[1]);
-    std::string book=bookFromVector(words,2,words.size());
-    frame.setBody(+"Returning  "+book+" to "+Database::getInstance()->getLoanerName(book));
-    Database::getInstance()->deleteBook(words[1],words[2]);
+    frame.addHeader("destination", words[1]);
+    std::string book = bookFromVector(words, 2, words.size());
+    frame.setBody(+"Returning  " + book + " to " + Database::getInstance()->getLoanerName(book));
+    Database::getInstance()->deleteBook(words[1], words[2]);
     return frame.toString();
 }
-
+// creating the send frame to be sent
 std::string InputProcessor::status(std::vector<std::string> &words) {
-    StompFrame frame=StompFrame();
+    StompFrame frame = StompFrame();
     frame.setCommand(SEND);
-    frame.addHeader("destination",words[1]);
+    frame.addHeader("destination", words[1]);
     frame.setBody("book status");
-    return  frame.toString();
+    return frame.toString();
 
 }
-
+//creating the disconnect frame to be sent, saving the recipt
 std::string InputProcessor::logout(std::vector<std::string> &words) {
-    StompFrame* frame=new StompFrame();
+    logoutUnsubscribe();
+    StompFrame *frame = new StompFrame();
     frame->setCommand(DISCONNECT);
-    frame->addHeader("receipt",std::to_string(receipt_counter));
-    Database::getInstance()->addReciept(std::to_string(receipt_counter),frame);
+    frame->addHeader("receipt", std::to_string(receipt_counter));
+    Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
     return frame->toString();
 
 };
-
+//spliting lines to vector of words
 std::vector<std::string> InputProcessor::split_string_to_words_vector(std::string string) {
     std::istringstream iss(string);
     std::vector<std::string> words(std::istream_iterator<std::string>{iss},
                                    std::istream_iterator<std::string>());
     return words;
 }
-
+//parsing the host and port from input
 std::pair<std::string, short> InputProcessor::get_hostnip(std::string input) {
-    int split=input.find(':');
-    std::string host=input.substr(6,split-6);
-    short port=std::stoi(input.substr(split+1,4));
-    return std::make_pair(host,port);
+    int split = input.find(':');
+    std::string host = input.substr(6, split - 6);
+    short port = std::stoi(input.substr(split + 1, 4));
+    return std::make_pair(host, port);
 }
-
+// recovering book name from vector of words
 std::string InputProcessor::bookFromVector(std::vector<std::string> words, int start, int end) {
     std::string book;
-    for(int i=start;i<end;i++)
-        book+=words[i]+" ";
-    book=book.substr(0,book.size()-1);
+    for (int i = start; i < end; i++)
+        book += words[i] + " ";
+    book = book.substr(0, book.size() - 1);
     return book;
+}
+
+void InputProcessor::logoutUnsubscribe() {
+        for(auto genre:Database::getInstance()->getGenreList())
+        {
+            std::vector<std::string> words;
+            words[0]="";
+            words[1]=genre;
+            unsubscribe(words);
+        }
 }
 
 

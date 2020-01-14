@@ -15,12 +15,12 @@ int main(int argc, char *argv[]) {
     std::string userInput;
     ConnectionHandler *handler= nullptr;
     Protocol *protocol = nullptr;
-    InputProcessor processor = InputProcessor();//why not in the heap?
+    InputProcessor processor = InputProcessor();
     while (1) {
         userInput = "";
         std::getline(std::cin, userInput);
         if (userInput.find("login") == std::string::npos) {
-            std::cout << "Please enter 'login' command";
+            std::cout << "Please enter 'login' command"<<std::endl;
         }
         else {
             std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(userInput);
@@ -37,7 +37,12 @@ int main(int argc, char *argv[]) {
                     //Login Succesful!!!
                     break;
                 }
+            } else
+            {
+                delete handler;
+                delete protocol;
             }
+
         }
 
     }

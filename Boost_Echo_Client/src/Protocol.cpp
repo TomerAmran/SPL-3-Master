@@ -55,24 +55,24 @@ void Protocol::reciept(const std::string &id) {
 
 void Protocol::message(StompFrame frame) {
     std::vector<std::string> words = split_string_to_words_vector(frame.getBody());
-    if ((words[0] == Database::getInstance()->getName())|(words.size()==1)) {
+    if ((words[0] == Database::getInstance()->getName()) | (words.size() == 1)) {
         std::cout << frame.getHeaders().find("destination")->second << ":" << frame.getBody() << std::endl;
     } else if (words[1] == "has") {
-        std::string book= getBorrowedBookName(words);
+        std::string book = getBorrowedBookName(words);
         if (Database::getInstance()->wantedToBorrow(book)) {
             borrow(frame.getBody(), frame.getHeaders()["destination"]);
         }
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
     } else if (words[1] == "wish") {
-        std::string book=bookFromVector(words,4,words.size());
+        std::string book = bookFromVector(words, 4, words.size());
         contains(frame.getHeaders()["destination"], book);
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
-    } else if ((words[0] == "Taking") & (words[words.size()-1] == Database::getInstance()->getName())) {
-        std::string book=bookFromVector(words,1,words.size()-2);
+    } else if ((words[0] == "Taking") & (words[words.size() - 1] == Database::getInstance()->getName())) {
+        std::string book = bookFromVector(words, 1, words.size() - 2);
         lend(frame.getHeaders()["destination"], book);
-        std::cout <<frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
-    } else if ((words[0] == "Returning") & (words[words.size()-1] == Database::getInstance()->getName())) {
-        std::string book=bookFromVector(words,1,words.size()-2);
+        std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
+    } else if ((words[0] == "Returning") & (words[words.size() - 1] == Database::getInstance()->getName())) {
+        std::string book = bookFromVector(words, 1, words.size() - 2);
         getBack(frame.getHeaders()["destination"], book);
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
     } else if (words[1] == "status") {
@@ -86,7 +86,7 @@ void Protocol::message(StompFrame frame) {
 
 void Protocol::borrow(std::string msg, const std::string genre) {
     std::vector<std::string> words = split_string_to_words_vector(msg);
-    std::string book= getBorrowedBookName(words);
+    std::string book = getBorrowedBookName(words);
     Database::getInstance()->addBorrowedBook(genre, book, words[0]);
     StompFrame frame = StompFrame();
     frame.setCommand(SEND);
@@ -95,7 +95,7 @@ void Protocol::borrow(std::string msg, const std::string genre) {
     handler.sendFrameAscii(frame.toString(), '\0');
 }
 
-std::string Protocol::getBorrowedBookName(const std::vector<std::string> &words) {
+std::string Protocol::getBorrowedBookName(const std::vector<std::string>& words) {
     std::string book;
     if(words[2]=="added") {
         book = this->bookFromVector(words, 5, words.size());
@@ -137,7 +137,6 @@ void Protocol::contains(std::string genre, std::string book) {
     }
 }
 
-
 std::string Protocol::bookFromVector(std::vector<std::string> words, int start, int end) {
     std::string book;
     for(int i=start;i<end;i++)
@@ -146,6 +145,7 @@ std::string Protocol::bookFromVector(std::vector<std::string> words, int start, 
     return book;
 }
 
-bool Protocol::isLoggedOut(){return loggedOut;}
-bool Protocol::isLoggedIn(){ return loggedIn;}
+bool Protocol::isLoggedOut() { return loggedOut; }
+
+bool Protocol::isLoggedIn() { return loggedIn; }
 

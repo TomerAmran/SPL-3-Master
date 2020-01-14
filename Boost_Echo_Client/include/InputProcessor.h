@@ -24,6 +24,7 @@ private:
     std::string returnBook(std::vector<std::string>& words);
     std::string status(std::vector<std::string>& words);
     std::string logout(std::vector<std::string>& words);
+    void logoutUnsubscribe();
     std::string bookFromVector(std::vector<std::string> words,int start,int end);
 
 
