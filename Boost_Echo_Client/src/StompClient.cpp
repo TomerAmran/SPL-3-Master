@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
         userInput = "";
         std::getline(std::cin, userInput);
         if (userInput.find("login") == std::string::npos) {
-            std::cout << "Please enter 'login' command";
+            std::cout << "Please enter 'login' command"<<std::endl;
         }
         else {
             std::pair<std::string, short> handlerdata = InputProcessor::get_hostnip(userInput);

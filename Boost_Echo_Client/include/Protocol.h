@@ -11,24 +11,37 @@
 class Protocol {
 public:
     Protocol(ConnectionHandler& handler);
+    //processing the recived input from the server
     void processServer(std::string msg);
     bool isLoggedOut();
     bool isLoggedIn();
 private:
     ConnectionHandler& handler;
+    //splits the input to vector of words
     std::vector<std::string> split_string_to_words_vector(const std::string& string);
     bool loggedOut;
     bool loggedIn;
+    //reacting to connected frame
     void connected();
+    //reacting to error frame
     void error(std::string errMsg);
+    //reacting to reciept frame
     void reciept(const std::string& id);
+    //reacting to message frame
     void message(StompFrame frame);
+    //reacting to message frame that some one had a book that i wanted to borrow
     void borrow(std::string msg,const std::string genre);
+    //reacting to message frame containing: taking and from "username"
     void lend(std::string genre,std::string book);
+    //reacting to message frame containing book status
     void status(std::string genre);
+    //reacting to message frame containing returning and from username
     void getBack(std::string genre, std::string book);
+    //reacting to want to borrow frame of other users
     void contains(std::string genre, std::string book);
+    //retriving book name from vector of words
     std::string bookFromVector(std::vector<std::string> words,int start,int end);
+    //chosing the correct domain for retriving book name in an has..."bookname" message
     std::string getBorrowedBookName(const std::vector<std::string> &words);
 
 };

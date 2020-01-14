@@ -62,7 +62,7 @@ void Database::deleteBook(std::string genre, std::string book) {
 }
 
 bool Database::wantedToBorrow(std::string book) {
-
+    std::lock_guard<std::mutex> lock(want_to_borrow_lock);
     for (auto bookname:want_TO_Borrow) {
         if (bookname == book)
             return true;
@@ -124,6 +124,13 @@ Database::~Database() {
         p.second= nullptr;
     }
 
+}
+
+std::list<std::string> Database::getGenreList() {
+    std::list<std::string> genrelist;
+    for(auto p:genre_SubId_map)
+        genrelist.push_back(p.first);
+    return genrelist;
 }
 
 

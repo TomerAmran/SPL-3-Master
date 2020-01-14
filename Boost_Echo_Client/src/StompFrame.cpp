@@ -29,12 +29,12 @@ void StompFrame::parse(const std::string msg) {
         std::vector<std::string> lines;
         std::istringstream stream(msg);
         std::string line;
-        while (std::getline(stream, line)) {
+        while (std::getline(stream, line)) {//creating vector of string thats contains lines from the input
             lines.push_back(line);
         }
         command = string_Enum_Convertor[lines[0]];
         int i = 1;
-        while ((unsigned) i < lines.size() && lines[i] != "") {
+        while ((unsigned) i < lines.size() && lines[i] != "") {//creating headers from input
             int split = lines[i].find(':');
             headers.insert(std::make_pair(lines[i].substr(0, split), lines[i].substr(split + 1, lines[i].size())));
             i++;

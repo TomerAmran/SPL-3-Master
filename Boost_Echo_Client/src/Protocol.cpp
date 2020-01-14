@@ -95,9 +95,9 @@ void Protocol::borrow(std::string msg, const std::string genre) {
     handler.sendFrameAscii(frame.toString(), '\0');
 }
 
-std::string Protocol::getBorrowedBookName(const std::vector<std::string> &words) {
+std::string Protocol::getBorrowedBookName(const std::vector<std::string>& words) {
     std::string book;
-    if (words[2] == "added") {
+    if(words[2]=="added") {
         book = this->bookFromVector(words, 5, words.size());
     } else {
         book = this->bookFromVector(words, 2, words.size());
@@ -139,9 +139,9 @@ void Protocol::contains(std::string genre, std::string book) {
 
 std::string Protocol::bookFromVector(std::vector<std::string> words, int start, int end) {
     std::string book;
-    for (int i = start; i < end; i++)
-        book += words[i] + " ";
-    book = book.substr(0, book.size() - 1);
+    for(int i=start;i<end;i++)
+        book+=words[i]+" ";
+    book=book.substr(0,book.size()-1);
     return book;
 }
 
