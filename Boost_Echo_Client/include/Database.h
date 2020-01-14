@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <string>
 #include <mutex>
+#include <condition_variable>
 #include "StompFrame.h"
 
 class Database {
@@ -53,6 +54,7 @@ public:
     // gets the subid of a genre
     std::string getSubid(std::string genre);
     std::list<std::string> getGenreList();
+    bool canLogOut();
 
 
 private:
@@ -70,6 +72,7 @@ private:
     std:: mutex want_to_borrow_lock;
     //to sync the acsses to the reciept frame map cus both thread may change it
     std::mutex reciept_frame_lock;
+    std::condition_variable cv;
     void addGenre(std::string genre);
 };
 

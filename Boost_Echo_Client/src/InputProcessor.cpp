@@ -110,6 +110,7 @@ std::string InputProcessor::status(std::vector<std::string> &words) {
 //creating the disconnect frame to be sent, saving the recipt
 std::string InputProcessor::logout(std::vector<std::string> &words) {
     logoutUnsubscribe();
+    if(Database::getInstance()->canLogOut()){}
     StompFrame *frame = new StompFrame();
     frame->setCommand(DISCONNECT);
     frame->addHeader("receipt", std::to_string(receipt_counter));
@@ -143,9 +144,9 @@ std::string InputProcessor::bookFromVector(std::vector<std::string> words, int s
 void InputProcessor::logoutUnsubscribe() {
         for(auto genre:Database::getInstance()->getGenreList())
         {
-            std::vector<std::string> words;
-            words[0]="";
-            words[1]=genre;
+            std::vector<std::string> words=std::vector<std::string>();
+           words.push_back("");
+           words.push_back(genre);
             unsubscribe(words);
         }
 }
