@@ -38,6 +38,12 @@ int main(int argc, char *argv[]) {
                     //Login Succesful!!!
                     break;
                 }
+                else
+                {
+                    delete handler;
+                    delete protocol;
+                }
+
             } else
             {
                 delete handler;
