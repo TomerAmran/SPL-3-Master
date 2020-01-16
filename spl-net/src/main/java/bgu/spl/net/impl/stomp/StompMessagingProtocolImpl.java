@@ -1,8 +1,10 @@
 package bgu.spl.net.impl.stomp;
 
+import bgu.spl.net.Pair;
 import bgu.spl.net.api.StompMessagingProtocol;
 import bgu.spl.net.srv.Connections;
 import bgu.spl.net.srv.DataBase;
+import bgu.spl.net.srv.User;
 
 import java.util.HashMap;
 
@@ -41,6 +43,8 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
             case DISCONNECT:
                 DISCONNECT_received(frame.getHeaders(), frame.getBody());
                 break;
+            case STOMP:
+                CONNECT_received(frame.getHeaders());
         }
 
     }
@@ -73,15 +77,15 @@ public class StompMessagingProtocolImpl implements StompMessagingProtocol<String
     }
     private void SEND_received(HashMap<String,String> headers, String body){
         StompFrame message = new StompFrame();
-        for(int connectionId:database.GetUserSubIdsSubscribedToTopic(headers.get("destination")))
+        for(Pair<Integer,Integer> ids:database.GetUsersIdsSubscribedToTopic(headers.get("destination")))
         {
             message.setCommand("MESSAGE");
-            message.addHeader("subscription",database.GetUserSubId(headers.get("destination"),connectionId));
+            message.addHeader("subscription",ids.second.toString());
             message.addHeader("Message-id",(database.getAndIncreaseMessageCounter().toString()));
             message.addHeader("destination",headers.get("destination"));
             message.setBody(body);
 
-            connections.send(connectionId,message.toString());
+            connections.send(ids.first,message.toString());
 
         }
     }

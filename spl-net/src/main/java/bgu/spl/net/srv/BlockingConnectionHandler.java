@@ -47,19 +47,26 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
 
     @Override
     public void close() throws IOException {
-        connected = false;
-        sock.close();
+        synchronized (sock) {
+            connected = false;
+            sock.close();
+        }
     }
 
     @Override
     public synchronized void send(T msg) {
-        try {
-            out = new BufferedOutputStream(sock.getOutputStream());
-            if (msg != null) {
-                out.write(encdec.encode(msg));
-                out.flush();
+        synchronized (sock) {
+            if (!sock.isClosed()) {
+                try {
+                    out = new BufferedOutputStream(sock.getOutputStream());
+                    if (msg != null) {
+                        out.write(encdec.encode(msg));
+                        out.flush();
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
-        catch(IOException ex){ex.printStackTrace();}
     }
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class StompFrame {
     //fields
-    public static enum Command {CONNECT, CONNECTED, MESSAGE, RECEIPT, ERROR, SEND, SUBSCRIBE, UNSUBSCRIBE, DISCONNECT}
+    public static enum Command {CONNECT, CONNECTED, MESSAGE, RECEIPT, ERROR, SEND, SUBSCRIBE, UNSUBSCRIBE, DISCONNECT,STOMP}
     private Command command;
     private LinkedHashMap<String,String> headers;
     private String body;

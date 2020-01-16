@@ -1,5 +1,7 @@
 package bgu.spl.net.srv;
 
+import bgu.spl.net.Pair;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -76,12 +78,12 @@ public class DataBase {
     {
         return topic_Subscribtion_Map.get(topic).get(connectionId_User_Map.get(connectionId)).toString();
     }
-    public List<Integer> GetUserSubIdsSubscribedToTopic(String topic)
+    public List<Pair<Integer,Integer>> GetUsersIdsSubscribedToTopic(String topic)
     {
-        LinkedList<Integer> usersList = new LinkedList<Integer>();
+        LinkedList<Pair<Integer,Integer>> usersList = new LinkedList<Pair<Integer,Integer>>();
         if(topic_Subscribtion_Map.get(topic)!=null) {
            for (User user : topic_Subscribtion_Map.get(topic).keySet())
-                usersList.add(user.getConnectionId());
+                usersList.add(new Pair<>(user.getConnectionId(),topic_Subscribtion_Map.get(topic).get(user)));
         }
         return usersList;
     }
