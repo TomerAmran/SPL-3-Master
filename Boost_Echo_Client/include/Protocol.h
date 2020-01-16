@@ -30,7 +30,7 @@ private:
     //reacting to message frame
     void message(StompFrame frame);
     //reacting to message frame that some one had a book that i wanted to borrow
-    void borrow(std::string msg,const std::string genre);
+    void borrow(std::vector<std::string> &words, const std::string genre, std::string book);
     //reacting to message frame containing: taking and from "username"
     void lend(std::string genre,std::string book);
     //reacting to message frame containing book status
@@ -40,9 +40,8 @@ private:
     //reacting to want to borrow frame of other users
     void contains(std::string genre, std::string book);
     //retriving book name from vector of words
-    std::string bookFromVector(std::vector<std::string> words,int start,int end);
+    std::string bookFromVector(std::vector<std::string>& words,int start,int end);
     //chosing the correct domain for retriving book name in an has..."bookname" message
-    std::string getBorrowedBookName(const std::vector<std::string> &words);
 
 };
 

@@ -51,7 +51,6 @@ void InputProcessor::subscribe(std::vector<std::string> &words) {
     frame->addHeader("destination", words[1]);
     frame->addHeader("id", std::to_string(subId_counter));
     frame->addHeader("receipt", std::to_string(receipt_counter));
-
     Database::getInstance()->addReciept(std::to_string(receipt_counter), frame);
     subId_counter++;
     receipt_counter++;

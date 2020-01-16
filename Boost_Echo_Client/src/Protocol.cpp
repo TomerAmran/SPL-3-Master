@@ -62,10 +62,10 @@ void Protocol::message(StompFrame frame) {
     std::vector<std::string> words = split_string_to_words_vector(frame.getBody());
     if ((words[0] == Database::getInstance()->getName()) | (words.size() == 1)) {
         std::cout << frame.getHeaders().find("destination")->second << ":" << frame.getBody() << std::endl;
-    } else if (words[1] == "has") {
-        std::string book = getBorrowedBookName(words);
+    } else if (words[1] == "has"&&words[2]!="added") {
+        std::string book = bookFromVector(words,2,words.size());
         if (Database::getInstance()->wantedToBorrow(book)) {
-            borrow(frame.getBody(), frame.getHeaders()["destination"]);
+            borrow(words, frame.getHeaders()["destination"], book);
         }
         std::cout << frame.getHeaders()["destination"] << ":" << frame.getBody() << std::endl;
     } else if (words[1] == "wish") {
@@ -89,9 +89,7 @@ void Protocol::message(StompFrame frame) {
 
 }
 
-void Protocol::borrow(std::string msg, const std::string genre) {
-    std::vector<std::string> words = split_string_to_words_vector(msg);
-    std::string book = getBorrowedBookName(words);
+void Protocol::borrow(std::vector<std::string> &words, const std::string genre, std::string book) {
     Database::getInstance()->addBorrowedBook(genre, book, words[0]);
     StompFrame frame = StompFrame();
     frame.setCommand(SEND);
@@ -100,15 +98,7 @@ void Protocol::borrow(std::string msg, const std::string genre) {
     handler.sendFrameAscii(frame.toString(), '\0');
 }
 
-std::string Protocol::getBorrowedBookName(const std::vector<std::string>& words) {
-    std::string book;
-    if(words[2]=="added") {
-        book = this->bookFromVector(words, 5, words.size());
-    } else {
-        book = this->bookFromVector(words, 2, words.size());
-    }
-    return book;
-}
+
 
 void Protocol::lend(std::string genre, std::string book) {
     Database::getInstance()->lendBook(genre, book);
@@ -142,7 +132,7 @@ void Protocol::contains(std::string genre, std::string book) {
     }
 }
 
-std::string Protocol::bookFromVector(std::vector<std::string> words, int start, int end) {
+std::string Protocol::bookFromVector(std::vector<std::string>& words, int start, int end) {
     std::string book;
     for(int i=start;i<end;i++)
         book+=words[i]+" ";
