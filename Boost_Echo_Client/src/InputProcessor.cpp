@@ -129,7 +129,9 @@ std::vector<std::string> InputProcessor::split_string_to_words_vector(std::strin
 std::pair<std::string, short> InputProcessor::get_hostnip(std::string input) {
     int split = input.find(':');
     std::string host = input.substr(6, split - 6);
-    short port = std::stoi(input.substr(split + 1, 4));
+    std::string leftover=input.substr(split+1,input.size());
+    int whitespace=leftover.find(" ");
+    short port = std::stoi(leftover.substr(0, whitespace));
     return std::make_pair(host, port);
 }
 // recovering book name from vector of words
